@@ -1,18 +1,18 @@
-# Logboek Dataverwerkingen
+# Logboek Dataverwerkingen Extensie Lezen
 
 ## Deze standaard is in ontwikkeling 
 
-- De laatste versie van de standaard online lezen - [ReSpec publicatie](https://logius-standaarden.github.io/logboek-dataverwerkingen/)
+- De laatste versie van de standaard online lezen - [ReSpec publicatie](https://logius-standaarden.github.io/logboek-extensie-lezen/)
 - Meedoen aan de discussie en ontwikkeling kan via - [Mattermost Digilab omgeving](https://digilab.overheid.nl/chat/verwerkingenlogging)
-- vragen kunnen worden gemailed aan api@logius.nl of als issue worden ingebracht [via deze link](https://github.com/Logius-standaarden/logboek-dataverwerkingen/issues)
+- vragen kunnen worden gemailed aan api@logius.nl of als issue worden ingebracht [via deze link](https://github.com/Logius-standaarden/logboek-extensie-lezen/issues)
 
 ## Inleiding
-
-De overheid wil voor burgers en bedrijven zo transparant mogelijk zijn in de omgang met hun data. Daarom is het bij de informatieverwerking in datasets belangrijk om voor elke mutatie of raadpleging vast te leggen wie deze actie wanneer uitvoert, en waarom. Deze herleidbaarheid speelt zowel een rol in het kader van de wetgeving op het gebied van privacy als ook het streven naar openheid en transparantie bij de overheid. Voor een optimale samenwerking over organisaties en bronnen heen is voor deze logging een algemene standaard nodig.
 
 Het project Logboek Dataverwerkingen (voorheen: Verwerkingenlogging) maakt deel uit van het [actieplan Data bij de Bron](https://www.digitaleoverheid.nl/data-bij-de-bron/) en onderzoekt met Digilab in samenwerking met diverse overheidspartijen (ministeries, uitvoeringsorganisaties en gemeentes) of we op basis van de tot nu toe opgedane inzichten een overheidsbrede standaard kunnen vaststellen. Na het succesvol beproeven van de standaard wordt deze voorgesteld voor opname in de [‘Pas toe of leg uit’-lijst van het Forum voor Standaardisatie](https://forumstandaardisatie.nl/pas-toe-leg-uit-beleid).
 
 > bron: https://digilab.overheid.nl/projecten/logboek-dataverwerkingen/
+
+Hier gaat het om de extensie lezen op de standaard logboek dataverwerkingen: Een algemeen toepasbare standaard voor het lezen van gelogde overheidsdata. Deze standaard zal interoperabel kunnen werken met meerdere logging standaarden; Tenminste zal de standaard werken met de Logboek Dataverwerkingen standaard. De beschrijving van standaard zal gebeuren in de vorm van een extensie op de Logboek Dataverwerkingen standaard
 
 ## Doel
 
@@ -21,6 +21,12 @@ De standaard Logboek Dataverwerkingen beschrijft een manier om technisch interop
 - het wegschrijven van logs van dataverwerkingen
 - het aan elkaar relateren van logs van dataverwerkingen
 - het aan elkaar relateren van dataverwerkingen over de grenzen van systemen
+
+De extensie lezen breid deze uit met de mogelijkheid te kunnen lezen:
+
+- De logs van een (interne) bron te lezen
+- Logs lezen bij de(externe) bron(loggende organisatie)
+- Gerelateerde logs bij meerdere bronnen op te vragen
 
 ## Verwijzingen
 
