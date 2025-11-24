@@ -8,8 +8,8 @@ loadRespecWithConfiguration({
   specStatus: "WV",
   specType: "PR",
   pubDomain: "logboek",
-  shortName: "logboek-extensie-template",
-  publishDate: "2025-03-31",
+  shortName: "logboek-extensie-lezen",
+  publishDate: "2025-11-26",
   publishVersion: "0.9",
   prevVersion: [],
 
@@ -29,9 +29,9 @@ loadRespecWithConfiguration({
   authors:
     [
       {
-        name: "Nil Barua",
-        company: "Logius",
-        companyURL: "https://logius.nl",
+        name: "Frank Terpstra",
+        company: "Geonovum",
+        companyURL: "https://Geonovum.nl",
       },
       {
         name: "Tim van der Lippe",
@@ -39,5 +39,5 @@ loadRespecWithConfiguration({
         companyURL: "https://logius.nl",
       },
     ],
-  github: "https://github.com/Logius-standaarden/logboek-extensie-template",
+  github: "https://github.com/Logius-standaarden/logboek-extensie-lezen",
 });
