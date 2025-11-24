@@ -11,6 +11,8 @@ loadRespecWithConfiguration({
   shortName: "logboek-extensie-lezen",
   publishDate: "2025-11-26",
   publishVersion: "0.9",
+  // TODO: Verwijder voor publicatie
+  latestVersion: "https://logius-standaarden.github.io/logboek-extensie-lezen/",
   prevVersion: [],
 
   editors:
