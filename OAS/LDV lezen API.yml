@@ -8,20 +8,20 @@ info:
     email: f.terpstra@geonovum.nl
     url: https://www.digitaleoverheid.nl/innovatieproject/transparantieapp/
 servers:
-  - url: 'https://inz.apps.digilab.network/v0'
+  - url: '@TODO: Add server URL'
 tags:
-  - name: Traces
-    description: Alle API operaties die bij traces horen.
-  - name: Logs
-    description: Alle API operaties die bij logs horen.
+  - name: ProcessingActivities
+    description: Alle API operaties die bij processingActivities horen.
 paths:
-  /traces:
+  /processing-activities:
     get:
-      operationId: listTraces
-      description: Alle traces ophalen
-      summary: Alle traces ophalen
+      operationId: listProcessingActivities
+      description: Alle processingActivities ophalen
+      summary: Alle processingActivities ophalen
       tags:
-        - Traces
+        - ProcessingActivities
+      parameters:
+        - $ref: '#/components/parameters/traceId'
       responses:
         '200':
           headers:
@@ -33,130 +33,54 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Trace'
-  /traces/{traceId}:
-    parameters:
-      - $ref: '#/components/parameters/traceId'
-    get:
-      operationId: retrieveTrace
-      description: Trace ophalen
-      summary: Trace ophalen
-      tags:
-        - Traces
-      responses:
-        '200':
-          headers:
-            API-Version:
-              $ref: https://static.developer.overheid.nl/adr/components.yaml#/headers/API-Version
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Trace'
-        '404':
-          $ref: https://static.developer.overheid.nl/adr/components.yaml#/responses/404
-  /logs:
-    get:
-      operationId: listLogs
-      description: Alle logs ophalen
-      summary: Alle logs ophalen
-      tags:
-        - Logs
-      responses:
-        '200':
-          headers:
-            API-Version:
-              $ref: https://static.developer.overheid.nl/adr/components.yaml#/headers/API-Version
-            Link:
-              $ref: https://static.developer.overheid.nl/adr/components.yaml#/headers/Link
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Log'
-  /logs/{traceId}:
-    parameters:
-      - $ref: '#/components/parameters/traceId'
-    get:
-      operationId: retrieveLog
-      description: Log ophalen
-      summary: Log ophalen
-      tags:
-        - Logs
-      responses:
-        '200':
-          headers:
-            API-Version:
-              $ref: https://static.developer.overheid.nl/adr/components.yaml#/headers/API-Version
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Log'
-        '404':
-          $ref: https://static.developer.overheid.nl/adr/components.yaml#/responses/404
+                $ref: '#/components/schemas/ProcessingActivities'
 components:
   schemas:
-    Trace:
-      properties:
-        id:
-          type: string
-          format: uuid
-    Log:
+    ProcessingActivities: 
+      type: array
+      items: 
+        $ref: '#/components/schemas/ProcessingActivity'
+    ProcessingActivity:
       description: log object
       type: object
       properties:
         traceId:
           type: string
+          description: Unieke identificerende code van Trace die Dataverwerking volgt
           example: ef4e77b903b585fb6135fcf8d8555fb3
         spanId:
           type: string
+          description: Unieke identificerende code van Actie binnen de Dataverwerking
           example: beb0291b5162d850
-        parentSpanId:
+        status:
           type: string
-          example: beb0291b5162d850
-        tags:
-          type: object
-          example: { "foo": "bar" }
-          additionalProperties: true
-        personalData:
-          type: array
-          items:
-            type: string
-            example: Geboortedatum
-          example:
-            - Geboortedatum
-            - Burgerservicenummer
-        organization:
+          description: Status van de Actie
+          enum:
+            - Unset
+            - Ok
+            - Error
+        name:
           type: string
-          example: "Gemeente xyz"
+          description: Naam van de specifieke Actie binnen de Dataverwerking
+          example: verwerken van gegevens
         processingActivityId:
           type: string
           format: uri
           example: "092c7bd1-7a21-4ed5-b1f3-10555c5b4dfa"
-        processingActivity:
-          type: string
-          example: "Activiteit #1"
-        startedAt:
-          type: string
-          format: date-time
-          example: "2024-11-30T22:15:00Z"
-        duration:
-          type: integer
-          minimum: 0
+        startTime:
+          type: number
           format: uint64
-          description: duration of the trace in ms
-        statusCode:
+          description: Tijdstip waarop de Actie gestart is in milliseconden sinds Epoch
+          example: "1764068470669"
+        endTime:
+          type: number
+          format: uint64
+          description: Tijdstip waarop de Actie beëindigd is in milliseconden sinds Epoch
+          example: "1764068470669"
+        parentSpanId:
           type: string
-          description: The canonical status code that describes the result status of the operation.
-          enum:
-            - STATUS_CODE_UNSET
-            - STATUS_CODE_OK
-            - STATUS_CODE_ERROR
-        statusMessage:
-          type: string
-          description: An optional description of the status.
-          example: "authorization server denied request: Organisatie is geen lid van het FDS."
+          description: Unieke identificerende code aanroepende Actie binnen huidige Trace
+          example: beb0291b5162d850
       required:
         - traceId
         - spanId
@@ -169,15 +93,12 @@ components:
         - startedAt
         - duration
         - statusCode
-        - statusMessage
-    TraceId:
-      type: string
-      example: ef4e77b903b585fb6135fcf8d8555fb3
+        - statusMessage      
   parameters:
     traceId:
+      in: query
       name: traceId
-      in: path
-      description: traceId
-      required: true
       schema:
         type: string
+      required: false
+      description: Unieke identificerende code van Trace die Dataverwerking volgt
