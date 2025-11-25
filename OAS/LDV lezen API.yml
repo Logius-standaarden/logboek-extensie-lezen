@@ -22,6 +22,9 @@ paths:
         - ProcessingActivities
       parameters:
         - $ref: '#/components/parameters/traceId'
+        - $ref: '#/components/parameters/dpl.core.processingActivityId'
+        - $ref: '#/components/parameters/startTime'
+        - $ref: '#/components/parameters/endTime'
       responses:
         '200':
           headers:
@@ -63,10 +66,6 @@ components:
           type: string
           description: Naam van de specifieke Actie binnen de Dataverwerking
           example: verwerken van gegevens
-        processingActivityId:
-          type: string
-          format: uri
-          example: 092c7bd1-7a21-4ed5-b1f3-10555c5b4dfa
         startTime:
           type: number
           format: uint64
@@ -133,3 +132,29 @@ components:
         type: string
       required: false
       description: Unieke identificerende code van Trace die Dataverwerking volgt
+      example: ef4e77b903b585fb6135fcf8d8555fb3
+    dpl.core.processingActivityId:
+      in: query
+      name: dpl.core.processingActivityId
+      schema:
+        type: string
+        format: uri
+      required: false
+      description: Verwijzing naar een Register met meer informatie over de Verwerkingsactiviteit
+      example: http://boerenkoolstronkerade.el/verwerkingenregister
+    startTime:
+      in: query
+      name: startTime
+      schema: 
+        type: number
+        format: uint64
+        description: Tijdstip waarop de Actie gestart is in milliseconden sinds Epoch
+        example: "1764068470669"
+    endTime:
+      in: query
+      name: startTime
+      schema: 
+        type: number
+        format: uint64
+        description: Tijdstip waarop de Actie beëindigd is in milliseconden sinds Epoch
+        example: "1764068470669"
