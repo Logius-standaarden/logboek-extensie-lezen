@@ -3,6 +3,7 @@
 ### Overwegingen
 
 Voor het maken van deze specificatie hebben we gekeken naar:
+
 - [De referentie implementatie logboek dataverwerkingen]( https://gitlab.com/digilab.overheid.nl/ecosystem/logboek-dataverwerkingen/ldv-referentie-implementatie)
 - [De inzicht API]( https://gitlab.com/digilab.overheid.nl/ecosystem/logboek-dataverwerkingen/logboek-dataverwerkingen/-/blob/main/api/openapi.yaml?ref_type=heads)
 - [Opentelemetry Tracing API specificatie](https://opentelemetry.io/docs/specs/otel/trace/api/)
