@@ -8,7 +8,7 @@ info:
     email: f.terpstra@geonovum.nl
     url: https://www.digitaleoverheid.nl/innovatieproject/transparantieapp/
 servers:
-  - url: '@TODO: Add server URL'
+  - url: 'http://addyourserverhe.re/lezenapi/v0'
 tags:
   - name: ProcessingActivities
     description: Alle API operaties die bij processingActivities horen.
@@ -66,7 +66,7 @@ components:
         processingActivityId:
           type: string
           format: uri
-          example: "092c7bd1-7a21-4ed5-b1f3-10555c5b4dfa"
+          example: 092c7bd1-7a21-4ed5-b1f3-10555c5b4dfa
         startTime:
           type: number
           format: uint64
@@ -81,19 +81,50 @@ components:
           type: string
           description: Unieke identificerende code aanroepende Actie binnen huidige Trace
           example: beb0291b5162d850
+        resource:
+          description: Een object met velden dat gebruikt wordt om een systeem, applicatie of component aan te duiden op een manier die binnen de organisatie gebruikelijk is. Denk hierbij aan velden als naam en versienummer van een applicatie, of een verwijzing naar een record in een CMDB
+          type: object
+          properties:
+            attributes: {}
+        attributes:
+          type: object
+          description: Het veld attributes is een object, opgebouwd uit velden in een namespace met prefix dpl (data processing log). De volgende eerste drie velden zijn vereist in de namespace core de laatste twee zijn enkel vereist als er een aanroepende Applicatie is
+          properties:
+            dpl.core.processing_activity_id:
+              type: string
+              format: uri
+              description: Verwijzing naar een Register met meer informatie over de Verwerkingsactiviteit
+              example: http://boerenkoolstronkerade.el/verwerkingenregister
+            dpl.core.data_subject_id:
+              type: string
+              description: Unieke, versleutelde identificerende code van de Betrokkene
+              example: "123456782"
+            dpl.core.data_subject_id_type:
+              type: string
+              description: Type van de identificerende code, zoals BSN, personeelsnummer, of een URI naar een Register dat het type specificeert
+              example: BSN
+            dpl.core.foreign_operation.span_id:
+              type: string
+              description: Unieke identificerende code van de Actie bij externe partij
+              example: beb0291b5162d850      
+            dpl.core.foreign_operation.processor:
+              type: string
+              format: uri
+              description: Unieke identificerende code van de Actie bij externe partij
+              example: beb0291b5162d850      
+          required:
+            - dpl.core.processing_activity_id
+            - dpl.core.data_subject_id
+            - dpl.core.data_subject_id_type
       required:
         - traceId
         - spanId
-        - parentSpanId
-        - tags
-        - personalData
-        - organization
+        - status
+        - name
         - processingActivityId
-        - processingActivity
-        - startedAt
-        - duration
-        - statusCode
-        - statusMessage      
+        - startTime
+        - endTime
+        - attributes
   parameters:
     traceId:
       in: query
