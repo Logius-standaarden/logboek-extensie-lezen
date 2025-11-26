@@ -44,7 +44,7 @@ paths:
               $ref: https://static.developer.overheid.nl/adr/components.yaml#/headers/API-Version
             Link:
               $ref: https://static.developer.overheid.nl/adr/components.yaml#/headers/Link
-          description: "Bad Request, no query parameters provided. at least one of the following should be provided: traceId, dpl.core.processingActivityId, dpl.core.data_subject_id"
+          description: "Bad Request"
           content:
             application/problem+json:
               schema:
@@ -142,8 +142,12 @@ components:
         errors:
           type: object
           properties:
-            in: {}
-            detail: {}
+            in:
+              type: string
+              example: query
+            detail:
+              type: string
+              example: "no query parameters provided. at least one of the following should be provided: traceId, dpl.core.processingActivityId, dpl.core.data_subject_id"
             location: {}
             index: {}
             code: {}
