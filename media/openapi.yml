@@ -41,8 +41,6 @@ paths:
           headers:
             API-Version:
               $ref: https://static.developer.overheid.nl/adr/components.yaml#/headers/API-Version
-            Link:
-              $ref: https://static.developer.overheid.nl/adr/components.yaml#/headers/Link
           description: "Bad Request"
           content:
             application/problem+json:
