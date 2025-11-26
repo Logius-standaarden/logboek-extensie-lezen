@@ -16,13 +16,14 @@ paths:
   /processing-activities:
     get:
       operationId: listProcessingActivities
-      description: Alle processingActivities ophalen
-      summary: Alle processingActivities ophalen
+      description: Alle dataverwerkingen ophalen
+      summary: Alle dataverwerkingen ophalen
       tags:
         - ProcessingActivities
       parameters:
         - $ref: '#/components/parameters/traceId'
         - $ref: '#/components/parameters/dpl.core.processingActivityId'
+        - $ref: '#/components/parameters/dpl.core.data_subject_id'
         - $ref: '#/components/parameters/startTime'
         - $ref: '#/components/parameters/endTime'
       responses:
@@ -37,6 +38,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProcessingActivities'
+        '400':
+          headers:
+            API-Version:
+              $ref: https://static.developer.overheid.nl/adr/components.yaml#/headers/API-Version
+            Link:
+              $ref: https://static.developer.overheid.nl/adr/components.yaml#/headers/Link
+          description: "Bad Request, no query parameters provided. at least one of the following should be provided: traceId, dpl.core.processingActivityId, dpl.core.data_subject_id"
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/nlgovproblem'
 components:
   schemas:
     ProcessingActivities: 
@@ -44,7 +56,7 @@ components:
       items: 
         $ref: '#/components/schemas/ProcessingActivity'
     ProcessingActivity:
-      description: log object
+      description: Dataverwerking
       type: object
       properties:
         traceId:
@@ -87,7 +99,7 @@ components:
             attributes: {}
         attributes:
           type: object
-          description: Het veld attributes is een object, opgebouwd uit velden in een namespace met prefix dpl (data processing log). De volgende eerste drie velden zijn vereist in de namespace core de laatste twee zijn enkel vereist als er een aanroepende Applicatie is
+          description: Het veld attributes is een object, opgebouwd uit velden in een namespace met prefix dpl (data processing log). De eerste drie velden zijn vereist in de namespace core de laatste twee zijn enkel vereist als er een aanroepende Applicatie is
           properties:
             dpl.core.processing_activity_id:
               type: string
@@ -109,8 +121,8 @@ components:
             dpl.core.foreign_operation.processor:
               type: string
               format: uri
-              description: Unieke identificerende code van de Actie bij externe partij
-              example: beb0291b5162d850      
+              description: Link naar website van externe partij
+              example: http://www.boerenkoolstronkerade.el      
           required:
             - dpl.core.processing_activity_id
             - dpl.core.data_subject_id
@@ -124,6 +136,23 @@ components:
         - startTime
         - endTime
         - attributes
+    nlgovproblem:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            in: {}
+            detail: {}
+            location: {}
+            index: {}
+            code: {}
+          required:
+            - in
+            - detail
+          additionalProperties: false
+      required:
+      - errors
   parameters:
     traceId:
       in: query
@@ -148,13 +177,23 @@ components:
       schema: 
         type: number
         format: uint64
-        description: Tijdstip waarop de Actie gestart is in milliseconden sinds Epoch
-        example: "1764068470669"
+      required: false
+      description: Tijdstip waarop de Actie gestart is in milliseconden sinds Epoch
+      example: "1764068470669"
     endTime:
       in: query
       name: startTime
       schema: 
         type: number
         format: uint64
-        description: Tijdstip waarop de Actie beëindigd is in milliseconden sinds Epoch
-        example: "1764068470669"
+      required: false
+      description: Tijdstip waarop de Actie beëindigd is in milliseconden sinds Epoch
+      example: "1764068470669"
+    dpl.core.data_subject_id:
+      in: query
+      name: dpl.core.data_subject_id
+      schema: 
+        type: string
+      required: false
+      description: Type van de identificerende code, zoals BSN, personeelsnummer, of een URI naar een Register dat het type specificeert
+      example: "123456782"
