@@ -31,8 +31,6 @@ paths:
           headers:
             API-Version:
               $ref: https://static.developer.overheid.nl/adr/components.yaml#/headers/API-Version
-            Link:
-              $ref: https://static.developer.overheid.nl/adr/components.yaml#/headers/Link
           description: OK
           content:
             application/json:
@@ -63,10 +61,16 @@ components:
           type: string
           description: Unieke identificerende code van Trace die Dataverwerking volgt
           example: ef4e77b903b585fb6135fcf8d8555fb3
+          externalDocs:
+            description: Definitie van Trace in de standaard logboek dataverwerkingen
+            url: https://logius-standaarden.github.io/logboek-dataverwerkingen/#dfn-traces
         spanId:
           type: string
           description: Unieke identificerende code van Actie binnen de Dataverwerking
           example: beb0291b5162d850
+          externalDocs:
+            description: Definitie van Actie in de standaard logboek dataverwerkingen
+            url: https://logius-standaarden.github.io/logboek-dataverwerkingen/#dfn-acties
         status:
           type: string
           description: Status van de Actie
@@ -97,6 +101,9 @@ components:
           type: object
           properties:
             attributes: {}
+          externalDocs:
+            description: Uitleg van CMDB volgens ITIL v3
+            url: https://www.hci-itil.com/ITIL_v3/books/3_service_transition/service_transition_ch4_3.html    
         attributes:
           type: object
           description: Het veld attributes is een object, opgebouwd uit velden in een namespace met prefix dpl (data processing log). De eerste drie velden zijn vereist in de namespace core de laatste twee zijn enkel vereist als er een aanroepende Applicatie is
@@ -106,10 +113,16 @@ components:
               format: uri
               description: Verwijzing naar een Register met meer informatie over de Verwerkingsactiviteit
               example: http://boerenkoolstronkerade.el/verwerkingenregister
+              externalDocs:
+                description: Definitie van Register in de standaard logboek dataverwerkingen
+                url: https://logius-standaarden.github.io/logboek-dataverwerkingen/#dfn-registers 
             dpl.core.data_subject_id:
               type: string
               description: Unieke, versleutelde identificerende code van de Betrokkene
               example: "123456782"
+              externalDocs:
+                description: Definitie van Betrokken in de standaard logboek dataverwerkingen
+                url: https://logius-standaarden.github.io/logboek-dataverwerkingen/#dfn-betrokkenen
             dpl.core.data_subject_id_type:
               type: string
               description: Type van de identificerende code, zoals BSN, personeelsnummer, of een URI naar een Register dat het type specificeert
@@ -117,12 +130,18 @@ components:
             dpl.core.foreign_operation.span_id:
               type: string
               description: Unieke identificerende code van de Actie bij externe partij
-              example: beb0291b5162d850      
+              example: beb0291b5162d850
+              externalDocs:
+                description: Definitie van Actie in de standaard logboek dataverwerkingen
+                url: https://logius-standaarden.github.io/logboek-dataverwerkingen/#dfn-acties
             dpl.core.foreign_operation.processor:
               type: string
               format: uri
-              description: Link naar website van externe partij
-              example: http://www.boerenkoolstronkerade.el      
+              description: Link naar externe Applicatie
+              example: http://www.boerenkoolstronkerade.el  
+              externalDocs:
+                description: Definitie van Applicatie in de standaard logboek dataverwerkingen
+                url: https://logius-standaarden.github.io/logboek-dataverwerkingen/#dfn-applicaties
           required:
             - dpl.core.processing_activity_id
             - dpl.core.data_subject_id
@@ -136,6 +155,9 @@ components:
         - startTime
         - endTime
         - attributes
+      externalDocs:
+        description: Definitie van Dataverwerking in de standaard logboek dataverwerkingen
+        url: https://logius-standaarden.github.io/logboek-dataverwerkingen/#dfn-dataverwerkingen 
     nlgovproblem:
       type: object
       properties:
