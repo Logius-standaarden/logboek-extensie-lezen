@@ -1,0 +1,160 @@
+openapi: 3.0.2
+info:
+  title: LDV lezen API
+  description: API voor het lezen van Logboek dataverwerkingen
+  version: 1.0.0
+  contact:
+    name: Project TransparantieApp
+    email: f.terpstra@geonovum.nl
+    url: https://www.digitaleoverheid.nl/innovatieproject/transparantieapp/
+servers:
+  - url: 'http://addyourserverhe.re/lezenapi/v0'
+tags:
+  - name: ProcessingActivities
+    description: Alle API operaties die bij processingActivities horen.
+paths:
+  /processing-activities:
+    get:
+      operationId: listProcessingActivities
+      description: Alle processingActivities ophalen
+      summary: Alle processingActivities ophalen
+      tags:
+        - ProcessingActivities
+      parameters:
+        - $ref: '#/components/parameters/traceId'
+        - $ref: '#/components/parameters/dpl.core.processingActivityId'
+        - $ref: '#/components/parameters/startTime'
+        - $ref: '#/components/parameters/endTime'
+      responses:
+        '200':
+          headers:
+            API-Version:
+              $ref: https://static.developer.overheid.nl/adr/components.yaml#/headers/API-Version
+            Link:
+              $ref: https://static.developer.overheid.nl/adr/components.yaml#/headers/Link
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcessingActivities'
+components:
+  schemas:
+    ProcessingActivities: 
+      type: array
+      items: 
+        $ref: '#/components/schemas/ProcessingActivity'
+    ProcessingActivity:
+      description: log object
+      type: object
+      properties:
+        traceId:
+          type: string
+          description: Unieke identificerende code van Trace die Dataverwerking volgt
+          example: ef4e77b903b585fb6135fcf8d8555fb3
+        spanId:
+          type: string
+          description: Unieke identificerende code van Actie binnen de Dataverwerking
+          example: beb0291b5162d850
+        status:
+          type: string
+          description: Status van de Actie
+          enum:
+            - Unset
+            - Ok
+            - Error
+        name:
+          type: string
+          description: Naam van de specifieke Actie binnen de Dataverwerking
+          example: verwerken van gegevens
+        startTime:
+          type: number
+          format: uint64
+          description: Tijdstip waarop de Actie gestart is in milliseconden sinds Epoch
+          example: "1764068470669"
+        endTime:
+          type: number
+          format: uint64
+          description: Tijdstip waarop de Actie beëindigd is in milliseconden sinds Epoch
+          example: "1764068470669"
+        parentSpanId:
+          type: string
+          description: Unieke identificerende code aanroepende Actie binnen huidige Trace
+          example: beb0291b5162d850
+        resource:
+          description: Een object met velden dat gebruikt wordt om een systeem, applicatie of component aan te duiden op een manier die binnen de organisatie gebruikelijk is. Denk hierbij aan velden als naam en versienummer van een applicatie, of een verwijzing naar een record in een CMDB
+          type: object
+          properties:
+            attributes: {}
+        attributes:
+          type: object
+          description: Het veld attributes is een object, opgebouwd uit velden in een namespace met prefix dpl (data processing log). De volgende eerste drie velden zijn vereist in de namespace core de laatste twee zijn enkel vereist als er een aanroepende Applicatie is
+          properties:
+            dpl.core.processing_activity_id:
+              type: string
+              format: uri
+              description: Verwijzing naar een Register met meer informatie over de Verwerkingsactiviteit
+              example: http://boerenkoolstronkerade.el/verwerkingenregister
+            dpl.core.data_subject_id:
+              type: string
+              description: Unieke, versleutelde identificerende code van de Betrokkene
+              example: "123456782"
+            dpl.core.data_subject_id_type:
+              type: string
+              description: Type van de identificerende code, zoals BSN, personeelsnummer, of een URI naar een Register dat het type specificeert
+              example: BSN
+            dpl.core.foreign_operation.span_id:
+              type: string
+              description: Unieke identificerende code van de Actie bij externe partij
+              example: beb0291b5162d850      
+            dpl.core.foreign_operation.processor:
+              type: string
+              format: uri
+              description: Unieke identificerende code van de Actie bij externe partij
+              example: beb0291b5162d850      
+          required:
+            - dpl.core.processing_activity_id
+            - dpl.core.data_subject_id
+            - dpl.core.data_subject_id_type
+      required:
+        - traceId
+        - spanId
+        - status
+        - name
+        - processingActivityId
+        - startTime
+        - endTime
+        - attributes
+  parameters:
+    traceId:
+      in: query
+      name: traceId
+      schema:
+        type: string
+      required: false
+      description: Unieke identificerende code van Trace die Dataverwerking volgt
+      example: ef4e77b903b585fb6135fcf8d8555fb3
+    dpl.core.processingActivityId:
+      in: query
+      name: dpl.core.processingActivityId
+      schema:
+        type: string
+        format: uri
+      required: false
+      description: Verwijzing naar een Register met meer informatie over de Verwerkingsactiviteit
+      example: http://boerenkoolstronkerade.el/verwerkingenregister
+    startTime:
+      in: query
+      name: startTime
+      schema: 
+        type: number
+        format: uint64
+        description: Tijdstip waarop de Actie gestart is in milliseconden sinds Epoch
+        example: "1764068470669"
+    endTime:
+      in: query
+      name: startTime
+      schema: 
+        type: number
+        format: uint64
+        description: Tijdstip waarop de Actie beëindigd is in milliseconden sinds Epoch
+        example: "1764068470669"
