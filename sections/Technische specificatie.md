@@ -35,7 +35,9 @@ aanbeveling: Het is verstandig als de server ook bij het toepassen van query par
 
 ### Toevoeging bij schrijven Logs
 
-registreer bij iedere verwerking die een externe partij aanroept de URL van de API waar je de verwerkingen van die partij kan opzoeken.
+Registreer bij iedere verwerking die een externe partij aanroept de URL van de API waar je de verwerkingen van die partij kan opzoeken.
+
+TODO: wat is de naam van het veld en type, volgens de attributes tabel
 
 #### Query op basis van traceID
 
