@@ -49,7 +49,7 @@ De processingActivityID wordt gevuld met een verwijzing naar de verwerkingsactiv
 
 #### Query op basis van dataSubjectId
 
-De processingActivityID wordt gevuld met een verwijzing naar de verwerking (verwerkingsregister bij core standaard of algoritmeregister i.h.g.v. objecten extensie) die uitgevoerd wordt. Je wil dan alle traceIDs terugkrijgen die voor deze verwerking bekend zijn.
+De dataSubjectId gevuld met een verwijzing naar de betrokkene van verwerkingen. Je wil dan alle traceIDs terugkrijgen die voor deze betrokkene bekend zijn.
 
 #### Query op starttijd/eindtijd
 
