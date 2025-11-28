@@ -17,7 +17,7 @@ Wanneer er binnen één organisatie meerdere logboeken zijn dan moeten deze vanu
 
 De extensie voegt een extra attribuut toe aan dataverwerkingen bovenop de core standaard waarmee een aangeroepen externe organisatie (en bijbehorende lezen API) geidentificeerd kan worden.
 
-Begin bij het bevragen van de lezen APIs altijd bij de organisatie waarde verwerkingsactiviteit gestart is. Vanuit de daar opgevraagde dataverwerkingen zijn dan de URLs van APIs te vinden die als volgende bevraagd moeten worden om een compleet beeld van de verwerkingsactiviteit te krijgen. Op deze manier kan iteratief een compleet beeld opgebouwd worden.
+Begin bij het bevragen van de lezen APIs altijd bij de applicatie waar de verwerkingsactiviteit gestart is. Vanuit de daar opgevraagde dataverwerkingen zijn dan de URLs van APIs te vinden die als volgende bevraagd moeten worden om een compleet beeld van de verwerkingsactiviteit te krijgen. Op deze manier kan iteratief een compleet beeld opgebouwd worden.
 
 ### Werking lezen API
 
