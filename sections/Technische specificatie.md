@@ -45,7 +45,7 @@ De TraceID wordt voor organisatie overstijgende processen gevuld met de W3C Trac
 
 #### Query op basis van processingActivityID
 
-De processingActivityID wordt gevuld met een verwijzing naar de verwerking (verwerkingsregister bij core standaard of algoritmeregister i.h.g.v. objecten extensie) die uitgevoerd wordt. Je wil dan alle traceIDs terugkrijgen die voor deze verwerking bekend zijn.
+De processingActivityID wordt gevuld met een verwijzing naar de verwerkingsactiviteit (verwerkingsregister bij core standaard of algoritmeregister i.h.g.v. objecten extensie) die uitgevoerd wordt. Je wil dan alle traceIDs terugkrijgen die voor deze verwerkingsactiviteit bekend zijn.
 
 #### Query op basis van dataSubjectId
 
