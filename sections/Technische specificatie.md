@@ -58,11 +58,11 @@ Hierbij wil je filters kunnen toepassen tenminste op start_time en/of end_time e
 
 ### Todo
 
--	Pagination toevoegen
--	Na publicatie logboek dataverwerkingen core, verwijzingen naar begrippen in json schema aanpassen
--	Batch bevragingen mogelijk maken voor meerdere processingActivityIds/TraceIds/dataSubjectIds volgens Batching module ADR
--	Uitwerken hoe lezen uit te breiden voor objecten. Is dit een uitbreiding op de extensie lezen of op de extensie objecten?
--	Foutmelding definieren voor wanneer het maximum aantal terug te geven dataverwerkingen van de server door een request overschreden wordt
--	iets over beveiliging/autorisatie zeggen, security considerations?
--	Aanbeveling wat te doen als niet alle organisaties de lezen API implementeren
--	Verwijzen naar beleidsjuridischkader voor inrichting samenwerking tussen organisaties
+- Pagination toevoegen
+- Na publicatie logboek dataverwerkingen core, verwijzingen naar begrippen in json schema aanpassen
+- Batch bevragingen mogelijk maken voor meerdere processingActivityIds/TraceIds/dataSubjectIds volgens Batching module ADR
+- Uitwerken hoe lezen uit te breiden voor objecten. Is dit een uitbreiding op de extensie lezen of op de extensie objecten?
+- Foutmelding definieren voor wanneer het maximum aantal terug te geven dataverwerkingen van de server door een request overschreden wordt
+- iets over beveiliging/autorisatie zeggen, security considerations?
+- Aanbeveling wat te doen als niet alle organisaties de lezen API implementeren
+- Verwijzen naar beleidsjuridischkader voor inrichting samenwerking tussen organisaties
