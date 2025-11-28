@@ -23,9 +23,9 @@ Begin bij het bevragen van de lezen APIs altijd bij de organisatie waarde verwer
 
 De lezen API kent één type resource Dataverwerkingen volgens de core standaard logboek dataverwerkingen oftewel ProcessingActivities in opentelemetry. Voor het bevragen van deze resource moet tenminste een van de volgende query parameters toegepast worden:
 
--	traceID (Trace)
--	dpl.core.processingActivityID (Verwerkingsactiviteit)
--	dataSubjectId (Betrokkene)
+- traceID (Trace)
+- dpl.core.processingActivityID (Verwerkingsactiviteit)
+- dataSubjectId (Betrokkene)
 
 Wanneer dit bij een request aan de server niet gebeurd geeft de server een http 400 bad request melding terug die aangeeft dat hieraan niet voldaan is.
 
@@ -33,11 +33,9 @@ overweging: wanneer geen query paramaters worden toegepast geeft de server alle 
 
 aanbeveling: Het is verstandig als de server ook bij het toepassen van query parameters een maximum stelt aan het aantal terug te geven dataverwerkingen.
 
-
 ### Toevoeging bij schrijven Logs
 
 registreer bij iedere verwerking die een externe partij aanroept de URL van de API waar je de verwerkingen van die partij kan opzoeken.
- 
 
 #### Query op basis van traceID
 
@@ -54,7 +52,6 @@ De processingActivityID wordt gevuld met een verwijzing naar de verwerking (verw
 #### Query op starttijd/eindtijd
 
 Hierbij wil je filters kunnen toepassen tenminste op start_time en/of end_time einde van de dataverwerkingen.
-
 
 ### Todo
 
