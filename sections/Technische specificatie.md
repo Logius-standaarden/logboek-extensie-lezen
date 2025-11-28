@@ -27,7 +27,7 @@ De lezen API kent één type resource Dataverwerkingen volgens de core standaard
 - dpl.core.processingActivityID (Verwerkingsactiviteit)
 - dataSubjectId (Betrokkene)
 
-Wanneer dit bij een request aan de server niet gebeurd geeft de server een http 400 bad request melding terug die aangeeft dat hieraan niet voldaan is.
+Wanneer dit bij een request aan de server niet gebeurd, MOET de server antwoorden met een HTTP 400 Bad Request, die aangeeft dat hieraan niet voldaan is.
 
 overweging: wanneer geen query paramaters worden toegepast geeft de server alle dataverwerkingen terug. Het risico is dan groot dat zowel client als server dit niet aankunnen.
 
