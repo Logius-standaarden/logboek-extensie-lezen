@@ -29,7 +29,7 @@ De lezen API kent één type resource Dataverwerkingen volgens de core standaard
 
 Wanneer dit bij een request aan de server niet gebeurd, MOET de server antwoorden met een HTTP 400 Bad Request, die aangeeft dat hieraan niet voldaan is.
 
-overweging: wanneer geen query paramaters worden toegepast geeft de server alle dataverwerkingen terug. Het risico is dan groot dat zowel client als server dit niet aankunnen.
+<p class="note">Wanneer geen query paramaters worden meegegeven, dan zou de server alle dataverwerkingen terug moeten geven. Het risico is dan groot dat zowel client als server dit niet aankunnen, alsmede dat er teveel gegevens worden gedeeld.
 
 aanbeveling: Het is verstandig als de server ook bij het toepassen van query parameters een maximum stelt aan het aantal terug te geven dataverwerkingen.
 
