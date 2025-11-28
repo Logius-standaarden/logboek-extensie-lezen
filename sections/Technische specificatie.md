@@ -21,7 +21,7 @@ Begin bij het bevragen van de lezen APIs altijd bij de applicatie waar de verwer
 
 ### Werking lezen API
 
-De lezen API kent één type resource Dataverwerkingen volgens de core standaard logboek dataverwerkingen oftewel ProcessingActivities in opentelemetry. Voor het bevragen van deze resource moet tenminste een van de volgende query parameters toegepast worden:
+De lezen API kent één type resource Dataverwerkingen volgens de core standaard logboek dataverwerkingen oftewel ProcessingActivities in opentelemetry. Voor het bevragen van deze resource MOET tenminste een van de volgende query parameters meegegeven worden:
 
 - traceID (Trace)
 - dpl.core.processingActivityID (Verwerkingsactiviteit)
