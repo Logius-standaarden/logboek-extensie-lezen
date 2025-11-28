@@ -15,7 +15,7 @@ Voor het maken van deze specificatie hebben we gekeken naar:
 Per logboek is kan er één lezen API geimplementeerd worden. Deze geeft toegang tot alle dataverwerkingen die in dit logboek zijn opgeslagen. Indien de verwerkingsactiviteit over meerdere applicaties (met eigen logboeken) gaat, dienen alle lezen APIs bevraagd te worden om een compleet beeld van de verwerkingsactiviteit te krijgen.
 Wanneer er binnen één organisatie meerdere logboeken zijn dan moeten deze vanuit oogpunt van de lezen extensie gezien worden als aparte applicaties en voor elk logboek de lezen API implementeren.
 
-De extensie voegt een extra veld toe aan dataverwerkingen bovenop de core standaard waarmee een aangeroepen externe organisatie(en bijbehorende lezen API) geidentificeerd kan worden.
+De extensie voegt een extra attribuut toe aan dataverwerkingen bovenop de core standaard waarmee een aangeroepen externe organisatie (en bijbehorende lezen API) geidentificeerd kan worden.
 
 Begin bij het bevragen van de lezen APIs altijd bij de organisatie waarde verwerkingsactiviteit gestart is. Vanuit de daar opgevraagde dataverwerkingen zijn dan de URLs van APIs te vinden die als volgende bevraagd moeten worden om een compleet beeld van de verwerkingsactiviteit te krijgen. Op deze manier kan iteratief een compleet beeld opgebouwd worden.
 
