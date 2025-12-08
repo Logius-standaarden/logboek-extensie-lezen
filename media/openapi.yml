@@ -213,7 +213,7 @@ components:
       example: "1764068470669"
     endTime:
       in: query
-      name: startTime
+      name: endTime
       schema: 
         type: number
         format: uint64
