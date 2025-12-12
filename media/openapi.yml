@@ -82,7 +82,7 @@ components:
           description: Naam van de specifieke Actie binnen de Dataverwerking
           example: verwerken van gegevens
         startTime:
-          type: number
+          type: integer
           format: uint64
           description: Tijdstip waarop de Actie gestart is in milliseconden sinds Epoch
           example: "1764068470669"
@@ -90,7 +90,7 @@ components:
             description: Definitie van start_time in de standaard logboek dataverwerkingen
             url: https://logius-standaarden.github.io/logboek-dataverwerkingen/#start_time
         endTime:
-          type: number
+          type: integer
           format: uint64
           description: Tijdstip waarop de Actie beëindigd is in milliseconden sinds Epoch
           example: "1764068470669"
@@ -206,7 +206,7 @@ components:
       in: query
       name: startTime
       schema: 
-        type: number
+        type: integer
         format: uint64
       required: false
       description: Tijdstip waarop de Actie gestart is in milliseconden sinds Epoch
@@ -215,7 +215,7 @@ components:
       in: query
       name: endTime
       schema: 
-        type: number
+        type: integer
         format: uint64
       required: false
       description: Tijdstip waarop de Actie beëindigd is in milliseconden sinds Epoch
