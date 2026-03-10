@@ -132,13 +132,6 @@ components:
               type: string
               description: Type van de identificerende code, zoals BSN, personeelsnummer, of een URI naar een Register dat het type specificeert
               example: BSN
-            dpl.core.foreign_operation.span_id:
-              type: string
-              description: Unieke identificerende code van de Actie bij externe partij
-              example: beb0291b5162d850
-              externalDocs:
-                description: Definitie van Actie in de standaard logboek dataverwerkingen
-                url: https://logius-standaarden.github.io/logboek-dataverwerkingen/#dfn-acties
             dpl.core.foreign_operation.processor:
               type: string
               format: uri
