@@ -144,6 +144,7 @@ components:
             - dpl.core.processing_activity_id
             - dpl.core.data_subject_id
             - dpl.core.data_subject_id_type
+          additionalProperties: true  
       required:
         - traceId
         - spanId
