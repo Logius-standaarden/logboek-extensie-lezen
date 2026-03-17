@@ -111,7 +111,7 @@ components:
             url: https://www.hci-itil.com/ITIL_v3/books/3_service_transition/service_transition_ch4_3.html    
         attributes:
           type: object
-          description: Het veld attributes is een object, opgebouwd uit velden in een namespace met prefix dpl (data processing log). De eerste drie velden zijn vereist in de namespace core de laatste twee zijn enkel vereist als er een aanroepende Applicatie is
+          description: Het veld attributes is een object, opgebouwd uit de volgende vier velden in een namespace met prefix dpl (data processing log). De eerste drie velden zijn vereist in de namespace core, het laatste veld is enkel vereist als er een aanroepende Applicatie is
           properties:
             dpl.core.processing_activity_id:
               type: string
@@ -144,7 +144,6 @@ components:
             - dpl.core.processing_activity_id
             - dpl.core.data_subject_id
             - dpl.core.data_subject_id_type
-          additionalProperties: true  
       required:
         - traceId
         - spanId
