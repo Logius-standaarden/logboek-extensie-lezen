@@ -36,7 +36,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProcessingActivities'
+                $ref: '#/components/schemas/ListProcessingActivities'
         '400':
           headers:
             API-Version:
@@ -48,10 +48,15 @@ paths:
                 $ref: '#/components/schemas/nlgovproblem'
 components:
   schemas:
-    ProcessingActivities: 
-      type: array
-      items: 
-        $ref: '#/components/schemas/ProcessingActivity'
+    ListProcessingActivities:
+      type: object
+      required: 
+      - processingActivities
+      properties:
+        processingActivities: 
+          type: array 
+          items: 
+            $ref: '#/components/schemas/ProcessingActivity'
     ProcessingActivity:
       description: Dataverwerking
       type: object
