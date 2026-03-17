@@ -52,7 +52,6 @@ components:
       type: object
       required: 
       - processingActivities
-      - organization
       properties:
         processingActivities: 
           type: array 
