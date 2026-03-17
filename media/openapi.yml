@@ -58,23 +58,6 @@ components:
           type: array 
           items: 
             $ref: '#/components/schemas/ProcessingActivity'
-        organization:
-          $ref: '#/components/schemas/Organization'
-    Organization:
-      type: object
-      required:
-        - name
-        - logo
-      properties:
-        name:
-          type: string
-          description: Naam van de bevraagde organisatie
-          example: Kadaster
-        logo:
-          type: string
-          format: uri
-          description: Verwijzing naar een logo van de organisatie in SVG formaat
-          example: http://kadaster.nl/logo.svg          
     ProcessingActivity:
       description: Dataverwerking
       type: object
