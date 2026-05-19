@@ -1,0 +1,126 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "LDV lezen API",
+    "description": "API voor het lezen van Logboek dataverwerkingen",
+    "version": "1.1.0",
+    "contact": {
+      "name": "Standaard logboek dataverwerkingen extensie lezen",
+      "email": "f.terpstra@geonovum.nl",
+      "url": "https://logius-standaarden.github.io/logboek-extensie-lezen/"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://addyourserverhe.re/lezenapi/v0"
+    }
+  ],
+  "tags": [
+    {
+      "name": "ProcessingActivities",
+      "description": "Alle API operaties die bij processingActivities horen."
+    }
+  ],
+  "paths": {
+    "/processing-activities": {
+      "post": {
+        "operationId": "listProcessingActivitiesPost",
+        "description": "Alle dataverwerkingen ophalen wanneer query parameters in URL niet wenselijk zijn",
+        "summary": "Alle dataverwerkingen ophalen",
+        "tags": [
+          "ProcessingActivities"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/traceId"
+          },
+          {
+            "$ref": "#/components/parameters/dpl.core.processingActivityId"
+          },
+          {
+            "$ref": "#/components/parameters/dpl.core.data_subject_id"
+          },
+          {
+            "$ref": "#/components/parameters/startTime"
+          },
+          {
+            "$ref": "#/components/parameters/endTime"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/processingActivityRequest"
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "API-Version": {
+                "$ref": "https://static.developer.overheid.nl/adr/components.yaml#/headers/API-Version"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListProcessingActivities"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "headers": {
+              "API-Version": {
+                "$ref": "https://static.developer.overheid.nl/adr/components.yaml#/headers/API-Version"
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/nlgovproblem"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ListProcessingActivities": {
+        "type": "object",
+        "required": [
+          "processingActivities"
+        ],
+        "properties": {
+          "processingActivities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProcessingActivity"
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "traceId": {
+        "in": "query",
+        "name": "traceId",
+        "schema": {
+          "$ref": "#/components/schemas/traceId"
+        },
+        "required": false
+      }
+    },
+    "requestBodies": {
+      "processingActivityRequest": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "traceId": {
+                  "$ref": "#/components/schemas/traceId"
+                },
+                "startTime": {
+                  "$ref": "#/components/schemas/startTime"
