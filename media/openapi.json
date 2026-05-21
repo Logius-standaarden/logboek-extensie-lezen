@@ -216,12 +216,21 @@
 										"type": "object"
 									}
 								},
-								"required": [
-									"traceId",
-									"startTime",
-									"endTime",
-									"attributes"
-								]
+								"anyOf": [
+									{
+										"required": ["traceId"]
+									},
+									{
+										"required": ["startTime"]
+									},
+									{
+										"required": ["endTime"]
+									},
+									{
+										"required": ["attributes"]
+									}
+								],
+								"description": "Minimaal één moet gevuld zijn, zorg voor een zo exact mogelijke zoekopdracht"
 							}
 						}
 					}
