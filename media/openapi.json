@@ -123,7 +123,7 @@
 						"example": "ef4e77b903b585fb6135fcf8d8555fb3",
 						"externalDocs": {
 							"description": "Definitie van Trace in de standaard logboek dataverwerkingen",
-							"url": "https://logius-standaarden.github.io/logboek-dataverwerkingen/#dfn-traces"
+							"url": "http://gitdocumentatie.logius.nl/publicatie/logboek/dataverwerkingen/#trace_id"
 						}
 					},
 					"spanId": {
@@ -132,7 +132,7 @@
 						"example": "beb0291b5162d850",
 						"externalDocs": {
 							"description": "Definitie van Actie in de standaard logboek dataverwerkingen",
-							"url": "https://logius-standaarden.github.io/logboek-dataverwerkingen/#dfn-acties"
+							"url": "http://gitdocumentatie.logius.nl/publicatie/logboek/dataverwerkingen/#span_id"
 						}
 					},
 					"status": {
@@ -156,7 +156,7 @@
 						"example": "1764068470669",
 						"externalDocs": {
 							"description": "Definitie van start_time in de standaard logboek dataverwerkingen",
-							"url": "https://logius-standaarden.github.io/logboek-dataverwerkingen/#start_time"
+							"url": "http://gitdocumentatie.logius.nl/publicatie/logboek/dataverwerkingen/#start_time"
 						}
 					},
 					"endTime": {
@@ -166,7 +166,7 @@
 						"example": "1764068470669",
 						"externalDocs": {
 							"description": "Definitie van end_time in de standaard logboek dataverwerkingen",
-							"url": "https://logius-standaarden.github.io/logboek-dataverwerkingen/#end_time"
+							"url": "http://gitdocumentatie.logius.nl/publicatie/logboek/dataverwerkingen/#end_time"
 						}
 					},
 					"parentSpanId": {
@@ -182,7 +182,7 @@
 						},
 						"externalDocs": {
 							"description": "Uitleg van CMDB volgens ITIL v3",
-							"url": "https://www.hci-itil.com/ITIL_v3/books/3_service_transition/service_transition_ch4_3.html"
+							"url": "https://gitdocumentatie.logius.nl/publicatie/logboek/dataverwerkingen/#resource"
 						}
 					},
                     "attributes": {
