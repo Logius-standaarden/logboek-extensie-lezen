@@ -166,7 +166,7 @@
 						"example": "1764068470669",
 						"externalDocs": {
 							"description": "Definitie van end_time in de standaard logboek dataverwerkingen",
-							"url": "https://logius-standaarden.github.io/logboek-dataverwerkingen/#end_time"
+							"url": "http://gitdocumentatie.logius.nl/publicatie/logboek/dataverwerkingen/#end_time"
 						}
 					},
 					"parentSpanId": {
