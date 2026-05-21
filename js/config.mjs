@@ -20,12 +20,12 @@ loadRespecWithConfiguration({
       {
         name: "Nil Barua",
         company: "Logius",
-        companyURL: "https://logius.nl",
+        companyURL: "https://www.logius.nl",
       },
       {
         name: "Tim van der Lippe",
         company: "Logius",
-        companyURL: "https://logius.nl",
+        companyURL: "https://www.logius.nl",
       },
     ],
   authors:
@@ -33,12 +33,12 @@ loadRespecWithConfiguration({
       {
         name: "Frank Terpstra",
         company: "Geonovum",
-        companyURL: "https://Geonovum.nl",
+        companyURL: "https://www.geonovum.nl",
       },
       {
         name: "Tim van der Lippe",
         company: "Logius",
-        companyURL: "https://logius.nl",
+        companyURL: "https://www.logius.nl",
       },
     ],
   github: "https://github.com/Logius-standaarden/logboek-extensie-lezen",
