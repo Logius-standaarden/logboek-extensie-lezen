@@ -24,10 +24,7 @@
           "in": {
             "type": "string",
             "description": "Location of the error (e.g., body, query, header)",
-            "enum": [
-              "body",
-              "query"
-            ]
+            "enum": ["body", "query"]
           },
           "location": {
             "type": "string",
@@ -45,17 +42,9 @@
             "examples": ["must be ISO 8601"]
           }
         },
-        "required": [
-          "in",
-          "location",
-          "code",
-          "detail"
-        ]
+        "required": ["in", "location", "code", "detail"]
       }
     }
   },
-  "required": [
-    "status",
-    "title"
-  ]
+  "required": ["status", "title"]
 }
