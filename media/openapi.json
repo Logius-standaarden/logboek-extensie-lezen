@@ -5,8 +5,8 @@
     "description": "API voor het lezen van Logboek dataverwerkingen",
     "version": "1.1.0",
     "license": {
-      "name": "EUPL",
-      "url": "https://joinup.ec.europa.eu/collection/eupl/eupl-text-11-12"
+      "name": "CC4",
+      "url": "https://github.com/Logius-standaarden/API-Design-Rules/blob/develop/LICENSE"
     },
     "contact": {
       "name": "Standaard logboek dataverwerkingen extensie lezen",
@@ -26,7 +26,7 @@
     }
   ],
   "paths": {
-    "/v0/processing-activities": {
+    "/processing-activities": {
       "post": {
         "operationId": "listProcessingActivitiesPost",
         "description": "Alle dataverwerkingen ophalen",
