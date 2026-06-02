@@ -32,11 +32,6 @@
         "description": "Alle dataverwerkingen ophalen",
         "summary": "Alle dataverwerkingen ophalen",
         "tags": ["ProcessingActivities"],
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
         "requestBody": {
           "$ref": "#/components/requestBodies/ProcessingActivityRequest"
         },
@@ -55,14 +50,6 @@
     }
   },
   "components": {
-    "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer",
-        "bearerFormat": "JWT",
-        "description": "JWT access token. The token must contain a TraceID claim with the UUID of the trace the caller is authorized to access."
-      }
-    },
     "requestBodies": {
       "ProcessingActivityRequest": {
         "required": true,
