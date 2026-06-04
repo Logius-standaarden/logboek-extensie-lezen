@@ -57,7 +57,7 @@
             "content": {
               "application/problem+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/nlgovproblem"
+                  "$ref": "#/components/schemas/NlGovProblem"
                 }
               }
             }
@@ -80,7 +80,7 @@
           }
         }
       },
-      "traceId": {
+      "TraceId": {
         "type": "string",
         "description": "Unieke identificerende code van Trace die Dataverwerking volgt",
         "example": "ef4e77b903b585fb6135fcf8d8555fb3",
@@ -89,7 +89,7 @@
           "url": "https://logius-standaarden.github.io/logboek-dataverwerkingen/#dfn-traces"
         }
       },
-      "startTime": {
+      "StartTime": {
         "type": "integer",
         "format": "int64",
         "description": "Tijdstip waarop de Actie gestart is in milliseconden sinds Epoch",
@@ -99,7 +99,7 @@
           "url": "https://logius-standaarden.github.io/logboek-dataverwerkingen/#start_time"
         }
       },
-      "endTime": {
+      "EndTime": {
         "type": "integer",
         "format": "int64",
         "description": "Tijdstip waarop de Actie beëindigd is in milliseconden sinds Epoch",
@@ -178,14 +178,12 @@
             }
           },
           "attributes": {
-            "_comment": "Dit is een verwijzing naar de atributes volgens de logboek dataverwerkingen core standaard. Later wijzigen in een referentie naar schema register",
-            "$ref": "./attributes.schema.json"
+            "$ref": "https://schemas.don.projects.digilab.network/logboek-dataverwerkingen/attributes"
           }
         }
       },
-      "nlgovproblem": {
-        "_comment": "Dit is een verwijzing naar het ADR foutafhanedelingsschema. Later wijzigen in een referentie naar schema register",
-        "$ref": "./ProblemJson.schema.json"
+      "NlGovProblem": {
+        "$ref": "https://schemas.don.projects.digilab.network/api-design-rules/problemjson.json"
       }
     },
     "requestBodies": {
@@ -196,13 +194,13 @@
               "type": "object",
               "properties": {
                 "traceId": {
-                  "$ref": "#/components/schemas/traceId"
+                  "$ref": "#/components/schemas/TraceId"
                 },
                 "startTime": {
-                  "$ref": "#/components/schemas/startTime"
+                  "$ref": "#/components/schemas/StartTime"
                 },
                 "endTime": {
-                  "$ref": "#/components/schemas/endTime"
+                  "$ref": "#/components/schemas/EndTime"
                 },
                 "attributes": {
                   "type": "object"
