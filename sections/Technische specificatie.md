@@ -59,7 +59,7 @@ Hierbij wil je filters kunnen toepassen tenminste op start_time en/of end_time e
 
 ### Beveilingsoverwegingen (Security considerations)
 
-In de OAS specificatie staat geen authenticatie voor de leze API gespecificeerd. Dit is bewust niet normatief neergezet om per implementatie de vrijheid te hebben dit binnen het domein waarin de standaard wordt geimplementeerd open te laten. Het is echter wel belangrijk om het endpoint goed te beveiligen. Dus zorg tenminste voor authenticatie van de client die de lezen API bevraagd en richt autorisatie regels in zodat een client alleen toegang krijgt tot loggingregels waar deze recht op heeft. In zijn algemeenheid biedt de module access control van het kennisplatform APIs hier goede handvaten voor. De referentie-implementatie van logboek dataverwerkingen geeft een specifiek voorbeeld voor hoe dit gedaan kan worden.
+In de OAS specificatie staat geen authenticatie voor de lezen API gespecificeerd. Dit is bewust niet normatief neergezet om per implementatie de vrijheid te hebben dit binnen het domein waarin de standaard wordt geimplementeerd open te laten. Het is echter wel belangrijk om het endpoint goed te beveiligen. Dus zorg tenminste voor authenticatie van de client die de lezen API bevraagd en richt autorisatie regels in zodat een client alleen toegang krijgt tot loggingregels waar deze recht op heeft. In zijn algemeenheid biedt de [module access control van het kennisplatform APIs](https://docs.geostandaarden.nl/api/API-Strategie-mod-access-control/) hier goede handvaten voor. De [referentie-implementatie](https://gitlab.com/digilab.overheid.nl/ecosystem/logboek-dataverwerkingen/ldv-referentie-implementatie) van logboek dataverwerkingen geeft één specifiek voorbeeld voor hoe dit gedaan kan worden.
 
 ### Todo
 
@@ -68,6 +68,5 @@ In de OAS specificatie staat geen authenticatie voor de leze API gespecificeerd.
 - Batch bevragingen mogelijk maken voor meerdere processingActivityIds/TraceIds/dataSubjectIds volgens Batching module ADR
 - Uitwerken hoe lezen uit te breiden voor objecten. Is dit een uitbreiding op de extensie lezen of op de extensie objecten?
 - Foutmelding definieren voor wanneer het maximum aantal terug te geven dataverwerkingen van de server door een request overschreden wordt
-- iets over beveiliging/autorisatie zeggen, security considerations?
 - Aanbeveling wat te doen als niet alle organisaties de lezen API implementeren
 - Verwijzen naar beleidsjuridischkader voor inrichting samenwerking tussen organisaties
