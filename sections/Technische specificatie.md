@@ -21,7 +21,7 @@ Begin bij het bevragen van de lezen APIs altijd bij de applicatie waar de verwer
 
 ### Werking lezen API
 
-De lezen API kent één type resource Dataverwerkingen volgens de core standaard logboek dataverwerkingen oftewel ProcessingActivities in opentelemetry. Voor het bevragen van deze resource MOET tenminste een van de volgende query parameters meegegeven worden:
+De lezen API kent één type resource Dataverwerkingen volgens de core standaard logboek dataverwerkingen oftewel ProcessingActivities in opentelemetry. Voor het bevragen van deze resource MOET tenminste een van de volgende parameters meegegeven worden:
 
 - traceID (Trace)
 - dpl.core.processingActivityID (Verwerkingsactiviteit)
@@ -35,9 +35,12 @@ aanbeveling: Het is verstandig als de server ook bij het toepassen van query par
 
 ### Toevoeging bij schrijven Logs
 
-Registreer bij iedere verwerking die een externe partij aanroept de URL van de API waar je de verwerkingen van die partij kan opzoeken.
+De lezen extensie voegt één attribuut toe ten opzichte van de Core standaard. Deze is alleen nodig als een implementerende applicatie onderdeel is van een keten waarin meerdere loggende applicaties zijn. Het stelt in staat te verwijzen naar de volgende partij of applicatie in de keten waar verdere logging over een ketenproces te vinden is. Registreer bij iedere verwerking die een externe partij aanroept de URL van de API waar je de verwerkingen van die partij kan opzoeken. Indien er geen sprake is van een keten of een de implementerende applicatie de laatste schakel in de keten is dan hoeft dit attribuut niet geschreven te worden. Wanneer er wel een volgende partij is maar deze de lezen extensie (nog) niet implmenteerd kan je in dit attribuut een URL die verwijst naar een pagina met contactgegevens opnemen. Dit attribuut is van Niveau 1 dat wil zeggen dat het bij ieder detail niveau van logging opgenomen kan worden.
 
-TODO: wat is de naam van het veld en type, volgens de attributes tabel
+
+| attribute                   | Niveau | beschrijving                                                                                                                               |
+|-----------------------------|--------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| dpl.read.externalReadAPI_id | 1      | verwijzing naar de lezen API van de aan te roepen externe applicatie of partij. uri naar uniek identificeerbare API volgens lezen extensie |
 
 #### Query op basis van traceID
 
@@ -49,11 +52,15 @@ De processingActivityID wordt gevuld met een verwijzing naar de verwerkingsactiv
 
 #### Query op basis van dataSubjectId
 
-De dataSubjectId gevuld met een verwijzing naar de betrokkene van verwerkingen. Je wil dan alle traceIDs terugkrijgen die voor deze betrokkene bekend zijn.
+De dataSubjectId gevuld met een verwijzing naar de betrokkene van verwerkingen. Je wil dan alle traceIDs terugkrijgen die voor deze betrokkene bekend zijn. Het is hierbij aan te bevelen het gebruik van BSN en andere gevoelige personsgegevens in de logging te vermijden. Het waar mogelijk toepassen van pseudoniemen verminderd de kans op datalekken.
 
 #### Query op starttijd/eindtijd
 
-Hierbij wil je filters kunnen toepassen tenminste op start_time en/of end_time einde van de dataverwerkingen.
+Hierbij wil je filters kunnen toepassen tenminste op start_time en/of end_time einde van de dataverwerkingen. We kiezen ervoor om in de interface de REST API Designrules te volgen voor het aangeven van tijd. Deze kent andere conventies dan Open Telemetry waarin tijdstippen volgens de core standaard van logboek dataverwerkingen wordt vastgelegd. De implementatie van de lezen API zal dus een vertaling moeten maken van het OTLP formaat naar het ADR formaat.
+
+### Beveilingsoverwegingen (Security considerations)
+
+In de OAS specificatie staat geen authenticatie voor de leze API gespecificeerd. Dit is bewust niet normatief neergezet om per implementatie de vrijheid te hebben dit binnen het domein waarin de standaard wordt geimplementeerd open te laten. Het is echter wel belangrijk om het endpoint goed te beveiligen. Dus zorg tenminste voor authenticatie van de client die de lezen API bevraagd en richt autorisatie regels in zodat een client alleen toegang krijgt tot loggingregels waar deze recht op heeft. In zijn algemeenheid biedt de module access control van het kennisplatform APIs hier goede handvaten voor. De referentie-implementatie van logboek dataverwerkingen geeft een specifiek voorbeeld voor hoe dit gedaan kan worden.
 
 ### Todo
 
