@@ -40,6 +40,11 @@ loadRespecWithConfiguration({
         company: "Logius",
         companyURL: "https://www.logius.nl",
       },
+      {
+        name: "Henk Erik van der Hoek",
+        company: "Geonovum",
+        companyURL: "https://www.geonovum.nl",
+      },
     ],
   github: "https://github.com/Logius-standaarden/logboek-extensie-lezen",
 });
