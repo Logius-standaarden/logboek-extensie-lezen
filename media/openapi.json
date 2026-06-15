@@ -4,6 +4,10 @@
     "title": "LDV lezen API",
     "description": "API voor het lezen van Logboek dataverwerkingen",
     "version": "1.1.0",
+    "license": {
+      "name": "CC4",
+      "url": "https://github.com/Logius-standaarden/API-Design-Rules/blob/develop/LICENSE"
+    },
     "contact": {
       "name": "Standaard logboek dataverwerkingen extensie lezen",
       "email": "api@logius.nl",
@@ -29,45 +33,144 @@
         "summary": "Alle dataverwerkingen ophalen",
         "tags": ["ProcessingActivities"],
         "requestBody": {
-          "$ref": "#/components/requestBodies/processingActivityRequest"
+          "$ref": "#/components/requestBodies/ProcessingActivityRequest"
         },
         "responses": {
           "200": {
-            "description": "OK",
-            "headers": {
-              "API-Version": {
-                "$ref": "https://static.developer.overheid.nl/adr/components.yaml#/headers/API-Version"
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ListProcessingActivities"
-                }
-              }
-            }
+            "$ref": "#/components/responses/ProcessingActivitiesResponse"
           },
           "400": {
-            "description": "Bad Request",
-            "headers": {
-              "API-Version": {
-                "$ref": "https://static.developer.overheid.nl/adr/components.yaml#/headers/API-Version"
-              }
-            },
-            "content": {
-              "application/problem+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NLgovProblem"
-                }
-              }
-            }
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
           }
         }
       }
     }
   },
   "components": {
+    "requestBodies": {
+      "ProcessingActivityRequest": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ProcessingActivityRequest"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "ProcessingActivitiesResponse": {
+        "description": "OK",
+        "headers": {
+          "API-Version": {
+            "$ref": "https://static.developer.overheid.nl/adr/components.yaml#/headers/API-Version"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ListProcessingActivities"
+            }
+          }
+        }
+      },
+      "BadRequest": {
+        "description": "Bad Request",
+        "headers": {
+          "API-Version": {
+            "$ref": "https://static.developer.overheid.nl/adr/components.yaml#/headers/API-Version"
+          }
+        },
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/Nlgovproblem"
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Unauthorized",
+        "headers": {
+          "API-Version": {
+            "$ref": "https://static.developer.overheid.nl/adr/components.yaml#/headers/API-Version"
+          }
+        },
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/Nlgovproblem"
+            }
+          }
+        }
+      }
+    },
     "schemas": {
+      "Nlgovproblem": {
+        "$ref": "https://schemas.don.projects.digilab.network/api-design-rules/problemjson.json"
+      },
+      "Attributes": {
+        "_comment": "Dit is een verwijzing naar een schema met de attributen die je voor jouw implementatie nodig hebt, indien je enkel LDV core toepast dan volstaat een referentie naar https://schemas.don.projects.digilab.network/logboek-dataverwerkingen/attributes anders wordt aangeraden dit lokale bestand aan te passen"
+        "$ref": "./attributes.schema.json"
+      },
+      "ProcessingActivityRequest": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Attributes"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "traceId": {
+                "$ref": "#/components/schemas/TraceID"
+              },
+              "startTime": {
+                "$ref": "#/components/schemas/StartTime"
+              },
+              "endTime": {
+                "$ref": "#/components/schemas/EndTime"
+              }
+            }
+          }
+        ],
+        "minProperties": 1,
+        "description": "Minimaal één moet gevuld zijn, zorg voor een zo exact mogelijke zoekopdracht"
+      },
+      "TraceID": {
+        "type": "string",
+        "format": "uuid",
+        "description": "Unieke identificerende code van Trace die Dataverwerking volgt",
+        "example": "ef4e77b9-b03b-585f-b613-5fcf8d8555fb",
+        "externalDocs": {
+          "description": "Definitie van Trace in de standaard logboek dataverwerkingen",
+          "url": "https://logius-standaarden.github.io/logboek-dataverwerkingen/#dfn-traces"
+        }
+      },
+      "StartTime": {
+        "type": "integer",
+        "format": "int64",
+        "description": "Tijdstip waarop de Actie gestart is in milliseconden sinds Epoch",
+        "example": 1764068470669,
+        "externalDocs": {
+          "description": "Definitie van start_time in de standaard logboek dataverwerkingen",
+          "url": "https://logius-standaarden.github.io/logboek-dataverwerkingen/#start_time"
+        }
+      },
+      "EndTime": {
+        "type": "integer",
+        "format": "int64",
+        "description": "Tijdstip waarop de Actie beëindigd is in milliseconden sinds Epoch",
+        "example": 1764068470669,
+        "externalDocs": {
+          "description": "Definitie van end_time in de standaard logboek dataverwerkingen",
+          "url": "https://logius-standaarden.github.io/logboek-dataverwerkingen/#end_time"
+        }
+      },
       "ListProcessingActivities": {
         "type": "object",
         "required": ["processingActivities"],
@@ -80,50 +183,30 @@
           }
         }
       },
-      "TraceId": {
-        "type": "string",
-        "description": "Unieke identificerende code van Trace die Dataverwerking volgt",
-        "example": "ef4e77b903b585fb6135fcf8d8555fb3",
-        "externalDocs": {
-          "description": "Definitie van Trace in de standaard logboek dataverwerkingen",
-          "url": "https://logius-standaarden.github.io/logboek-dataverwerkingen/#dfn-traces"
-        }
-      },
-      "StartTime": {
-        "type": "integer",
-        "format": "int64",
-        "description": "Tijdstip waarop de Actie gestart is in milliseconden sinds Epoch",
-        "example": "1764068470669",
-        "externalDocs": {
-          "description": "Definitie van start_time in de standaard logboek dataverwerkingen",
-          "url": "https://logius-standaarden.github.io/logboek-dataverwerkingen/#start_time"
-        }
-      },
-      "EndTime": {
-        "type": "integer",
-        "format": "int64",
-        "description": "Tijdstip waarop de Actie beëindigd is in milliseconden sinds Epoch",
-        "example": "1764068470669",
-        "externalDocs": {
-          "description": "Definitie van end_time in de standaard logboek dataverwerkingen",
-          "url": "https://logius-standaarden.github.io/logboek-dataverwerkingen/#end_time"
-        }
-      },
       "ProcessingActivity": {
         "description": "Dataverwerking",
         "type": "object",
+        "required": [
+          "traceId",
+          "spanId",
+          "status",
+          "name",
+          "startTime",
+          "endTime"
+        ],
         "properties": {
           "traceId": {
-            "type": "string",
-            "description": "Unieke identificerende code van Trace die Dataverwerking volgt",
-            "example": "ef4e77b903b585fb6135fcf8d8555fb3",
-            "externalDocs": {
-              "description": "Definitie van Trace in de standaard logboek dataverwerkingen",
-              "url": "http://gitdocumentatie.logius.nl/publicatie/logboek/dataverwerkingen/#trace_id"
-            }
+            "$ref": "#/components/schemas/TraceID"
+          },
+          "startTime": {
+            "$ref": "#/components/schemas/StartTime"
+          },
+          "endTime": {
+            "$ref": "#/components/schemas/EndTime"
           },
           "spanId": {
             "type": "string",
+            "pattern": "^[0-9a-fA-F]{16}$",
             "description": "Unieke identificerende code van Actie binnen de Dataverwerking",
             "example": "beb0291b5162d850",
             "externalDocs": {
@@ -141,28 +224,9 @@
             "description": "Naam van de specifieke Actie binnen de Dataverwerking",
             "example": "verwerken van gegevens"
           },
-          "startTime": {
-            "type": "integer",
-            "format": "int64",
-            "description": "Tijdstip waarop de Actie gestart is in milliseconden sinds Epoch",
-            "example": "1764068470669",
-            "externalDocs": {
-              "description": "Definitie van start_time in de standaard logboek dataverwerkingen",
-              "url": "http://gitdocumentatie.logius.nl/publicatie/logboek/dataverwerkingen/#start_time"
-            }
-          },
-          "endTime": {
-            "type": "integer",
-            "format": "int64",
-            "description": "Tijdstip waarop de Actie beëindigd is in milliseconden sinds Epoch",
-            "example": "1764068470669",
-            "externalDocs": {
-              "description": "Definitie van end_time in de standaard logboek dataverwerkingen",
-              "url": "http://gitdocumentatie.logius.nl/publicatie/logboek/dataverwerkingen/#end_time"
-            }
-          },
           "parentSpanId": {
             "type": "string",
+            "pattern": "^[0-9a-fA-F]{16}$",
             "description": "Unieke identificerende code aanroepende Actie binnen huidige Trace",
             "example": "beb0291b5162d850"
           },
@@ -178,51 +242,7 @@
             }
           },
           "attributes": {
-            "_comment": "dit is een verwijzing naar een schema met de attributen die je voor jouw implementatie nodig hebt, indien je enkel LDV core toepast dan volstaat een referentie naar https://schemas.don.projects.digilab.network/logboek-dataverwerkingen/attributes anders wordt aangeraden dit lokale bestand aan te passen"
-            "$ref": "./attributes.schema.json"
-          }
-        }
-      },
-      "NlGovProblem": {
-        "$ref": "https://schemas.don.projects.digilab.network/api-design-rules/problemjson.json"
-      }
-    },
-    "requestBodies": {
-      "processingActivityRequest": {
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "traceId": {
-                  "$ref": "#/components/schemas/TraceId"
-                },
-                "startTime": {
-                  "$ref": "#/components/schemas/StartTime"
-                },
-                "endTime": {
-                  "$ref": "#/components/schemas/EndTime"
-                },
-                "attributes": {
-                  "type": "object"
-                }
-              },
-              "anyOf": [
-                {
-                  "required": ["traceId"]
-                },
-                {
-                  "required": ["startTime"]
-                },
-                {
-                  "required": ["endTime"]
-                },
-                {
-                  "required": ["attributes"]
-                }
-              ],
-              "description": "Minimaal één moet gevuld zijn, zorg voor een zo exact mogelijke zoekopdracht"
-            }
+            "$ref": "#/components/schemas/Attributes"
           }
         }
       }
