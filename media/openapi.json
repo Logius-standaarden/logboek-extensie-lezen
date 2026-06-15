@@ -178,7 +178,8 @@
             }
           },
           "attributes": {
-            "$ref": "https://schemas.don.projects.digilab.network/logboek-dataverwerkingen/attributes"
+            "_comment": "dit is een verwijzing naar een schema met de attributen die je voor jouw implementatie nodig hebt, indien je enkel LDV core toepast dan volstaat een referentie naar https://schemas.don.projects.digilab.network/logboek-dataverwerkingen/attributes anders wordt aangeraden dit lokale bestand aan te passen"
+            "$ref": "./attributes.schema.json"
           }
         }
       },
