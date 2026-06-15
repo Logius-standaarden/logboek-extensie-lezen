@@ -37,7 +37,6 @@ aanbeveling: Het is verstandig als de server ook bij het toepassen van query par
 
 De lezen extensie voegt één attribuut toe ten opzichte van de Core standaard. Deze is alleen nodig als een implementerende applicatie onderdeel is van een keten waarin meerdere loggende applicaties zijn. Het stelt in staat te verwijzen naar de volgende partij of applicatie in de keten waar verdere logging over een ketenproces te vinden is. Registreer bij iedere verwerking die een externe partij aanroept de URL van de API waar je de verwerkingen van die partij kan opzoeken. Indien er geen sprake is van een keten of een de implementerende applicatie de laatste schakel in de keten is dan hoeft dit attribuut niet geschreven te worden. Wanneer er wel een volgende partij is maar deze de lezen extensie (nog) niet implmenteerd kan je in dit attribuut een URL die verwijst naar een pagina met contactgegevens opnemen. Dit attribuut is van Niveau 1 dat wil zeggen dat het bij ieder detail niveau van logging opgenomen kan worden.
 
-
 | attribute                   | Niveau | beschrijving                                                                                                                               |
 |-----------------------------|--------|--------------------------------------------------------------------------------------------------------------------------------------------|
 | dpl.read.externalReadAPI_id | 1      | verwijzing naar de lezen API van de aan te roepen externe applicatie of partij. uri naar uniek identificeerbare API volgens lezen extensie |
