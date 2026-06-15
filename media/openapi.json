@@ -57,7 +57,7 @@
             "content": {
               "application/problem+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NlGovProblem"
+                  "$ref": "#/components/schemas/NLgovProblem"
                 }
               }
             }
