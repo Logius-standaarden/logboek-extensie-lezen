@@ -45,7 +45,9 @@
                      }
                   },
                   "foreignOperation":{
-                     "Processor":{
+                     "type":"object",
+                     "description":"verwijzingen naar operaties die dit logboek aanroepen",
+                     "processor":{
                         "type":"string",
                         "format":"uri",
                         "description":"Link naar externe Applicatie",
@@ -63,7 +65,7 @@
                      "dataSubjectId":"123456789",
                      "dataSubjectIdType":"BSN",
                      "foreignOperation":{
-                        "Processor":"http://www.nattemer.en/applicatie"
+                        "processor":"http://www.nattemer.en/applicatie"
                      }
                   }
                ]
@@ -95,7 +97,7 @@
                   "dataSubjectId":"123456789",
                   "dataSubjectIdType":"BSN",
                   "foreignOperation":{
-                     "Processor":"http://www.nattemer.en/applicatie"
+                     "processor":"http://www.nattemer.en/applicatie"
                   }
                },
                "read":{
@@ -114,7 +116,7 @@
                "dataSubjectId":"123456789",
                "dataSubjectIdType":"BSN",
                "foreignOperation":{
-                  "Processor":"http://www.nattemer.en/applicatie"
+                  "processor":"http://www.nattemer.en/applicatie"
                }
             },
             "read":{
