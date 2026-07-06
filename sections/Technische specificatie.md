@@ -39,7 +39,7 @@ Dit attribuut MOET een specifieke waarde hebben ongeacht het gebruikte detailniv
 
 | Veld                        | Type   | Beschrijving                                                                                                                               |
 |-----------------------------|--------|--------------------------------------------------------------------------------------------------------------------------------------------|
-| nextLogbookId | String | verwijzing naar de lezen API van de aan te roepen externe applicatie of partij. uri naar uniek identificeerbare API volgens extensie lezen |
+| dpl.read.nextLogbookId | String | verwijzing naar de lezen API van de aan te roepen externe applicatie of partij. uri naar uniek identificeerbare API volgens extensie lezen |
 
 #### Query op basis van traceID
 
