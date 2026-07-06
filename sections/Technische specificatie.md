@@ -37,8 +37,8 @@ Indien er geen sprake is van het aanroepen van een andere API, dan MOET dit attr
 Wanneer er wel een volgende partij is maar deze de extensie lezen (nog) niet implementeert kan je in dit attribuut een URL die verwijst naar een pagina met contactgegevens opnemen.
 Dit attribuut MOET een specifieke waarde hebben ongeacht het gebruikte detailniveau.
 
-| Veld                        | Type   | Beschrijving                                                                                                                               |
-|-----------------------------|--------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| Veld                   | Type   | Beschrijving                                                                                                                               |
+|------------------------|--------|--------------------------------------------------------------------------------------------------------------------------------------------|
 | dpl.read.nextLogbookId | String | verwijzing naar de lezen API van de aan te roepen externe applicatie of partij. uri naar uniek identificeerbare API volgens extensie lezen |
 
 #### Query op basis van traceID
