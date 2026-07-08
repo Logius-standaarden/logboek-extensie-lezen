@@ -224,6 +224,11 @@
             "description": "Naam van de specifieke Actie binnen de Dataverwerking",
             "example": "verwerken van gegevens"
           },
+          "purpose": {
+            "type": "string",
+            "description": "Reden waarom de Dataverwerking plaatsvindt, afkomstig uit het register van verwerkingsactiviteiten",
+            "example": "Het beoordelen van een aanvraag voor kindertoeslag"
+          },
           "parentSpanId": {
             "type": "string",
             "pattern": "^[0-9a-fA-F]{16}$",
