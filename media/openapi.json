@@ -23,10 +23,6 @@
     {
       "name": "ProcessingActivities",
       "description": "Alle API operaties die bij processingActivities horen."
-    },
-    {
-      "name": "Logbooks",
-      "description": "Alle API operaties die bij logboek metadata horen."
     }
   ],
   "paths": {
@@ -45,22 +41,6 @@
           },
           "400": {
             "$ref": "#/components/responses/BadRequest"
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          }
-        }
-      }
-    },
-    "/logbook": {
-      "get": {
-        "operationId": "getLogbook",
-        "description": "Metadata ophalen van het Logboek dat door deze log-reader wordt ontsloten",
-        "summary": "Metadata van het Logboek ophalen",
-        "tags": ["Logbooks"],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/LogbookResponse"
           },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
@@ -94,21 +74,6 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/ListProcessingActivities"
-            }
-          }
-        }
-      },
-      "LogbookResponse": {
-        "description": "OK",
-        "headers": {
-          "API-Version": {
-            "$ref": "https://static.developer.overheid.nl/adr/components.yaml#/headers/API-Version"
-          }
-        },
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/Logbook"
             }
           }
         }
@@ -210,6 +175,9 @@
         "type": "object",
         "required": ["processingActivities"],
         "properties": {
+          "metadata": {
+            "$ref": "#/components/schemas/Metadata"
+          },
           "processingActivities": {
             "type": "array",
             "items": {
@@ -281,35 +249,18 @@
           }
         }
       },
-      "Logbook": {
+      "Metadata": {
         "description": "Metadata van een Logboek",
         "type": "object",
-        "required": ["id", "organization"],
+        "required": ["logbookId", "organization"],
         "properties": {
-          "id": {
+          "logbookId": {
             "type": "string",
-            "format": "uuid",
             "description": "Unieke identificerende code van het Logboek"
           },
-          "organization": {
-            "$ref": "#/components/schemas/OrganizationSummary",
+          "organizationName": {
+            "type": "string",
             "description": "Organisatie waartoe dit Logboek behoort"
-          }
-        }
-      },
-      "OrganizationSummary": {
-        "description": "Beknopte weergave van een organisatie",
-        "type": "object",
-        "required": ["id", "name"],
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid",
-            "description": "Unieke identificerende code van de organisatie"
-          },
-          "name": {
-            "type": "string",
-            "description": "Naam van de organisatie"
           }
         }
       }
