@@ -1,9 +1,0 @@
-{
-  "name": "extensie-lezen",
-  "version": "1.0.0",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "lint": "npx @redocly/cli@2.37.0 lint openapi.json"
-  }
-}
