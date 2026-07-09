@@ -280,6 +280,38 @@
             "$ref": "#/components/schemas/Attributes"
           }
         }
+      },
+      "Logbook": {
+        "description": "Metadata van een Logboek",
+        "type": "object",
+        "required": ["id", "organization"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Unieke identificerende code van het Logboek"
+          },
+          "organization": {
+            "$ref": "#/components/schemas/OrganizationSummary",
+            "description": "Organisatie waartoe dit Logboek behoort"
+          }
+        }
+      },
+      "OrganizationSummary": {
+        "description": "Beknopte weergave van een organisatie",
+        "type": "object",
+        "required": ["id", "name"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Unieke identificerende code van de organisatie"
+          },
+          "name": {
+            "type": "string",
+            "description": "Naam van de organisatie"
+          }
+        }
       }
     }
   }
