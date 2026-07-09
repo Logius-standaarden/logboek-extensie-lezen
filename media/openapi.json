@@ -175,6 +175,9 @@
         "type": "object",
         "required": ["processingActivities"],
         "properties": {
+          "metadata": {
+            "$ref": "#/components/schemas/Metadata"
+          },
           "processingActivities": {
             "type": "array",
             "items": {
@@ -243,6 +246,21 @@
           },
           "attributes": {
             "$ref": "#/components/schemas/Attributes"
+          }
+        }
+      },
+      "Metadata": {
+        "description": "Metadata van een Logboek",
+        "type": "object",
+        "required": ["logbookId", "organization"],
+        "properties": {
+          "logbookId": {
+            "type": "string",
+            "description": "Unieke identificerende code van het Logboek"
+          },
+          "organizationName": {
+            "type": "string",
+            "description": "Organisatie waartoe dit Logboek behoort"
           }
         }
       }
