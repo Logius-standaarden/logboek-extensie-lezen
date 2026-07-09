@@ -46,5 +46,12 @@ loadRespecWithConfiguration({
         companyURL: "https://www.geonovum.nl",
       },
     ],
+  preProcess: [
+    async (config, document) => {
+      const codeElement = document.querySelector('.openapi-spec code');
+      const openapiResponse = await fetch('media/openapi.json');
+      codeElement.innerText = await openapiResponse.text();
+    }
+  ],
   github: "https://github.com/Logius-standaarden/logboek-extensie-lezen",
 });
