@@ -46,7 +46,7 @@ loadRespecWithConfiguration({
         companyURL: "https://www.geonovum.nl",
       },
     ],
-  preProcess: [
+  postProcess: [
     async (config, document) => {
       const codeElement = document.querySelector('.openapi-spec code');
       const openapiResponse = await fetch('media/openapi.json');
