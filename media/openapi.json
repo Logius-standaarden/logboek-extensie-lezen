@@ -252,7 +252,7 @@
       "Metadata": {
         "description": "Metadata van een Logboek",
         "type": "object",
-        "required": ["logbookId", "organization"],
+        "required": ["logbookId", "organizationName"],
         "properties": {
           "logbookId": {
             "type": "string",
