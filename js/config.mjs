@@ -3,7 +3,7 @@ import { loadRespecWithConfiguration } from "https://logius-standaarden.github.i
 loadRespecWithConfiguration({
   useLogo: true,
   useLabel: true,
-  maxTocLevel: 3,
+  maxTocLevel: 2,
   license: "cc-by",
   specStatus: "WV",
   specType: "PR",
