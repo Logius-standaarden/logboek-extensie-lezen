@@ -1,4 +1,4 @@
-## Beleid Juridisch Kader
+## Juridische Beleidskader
 
 De logboek dataverwerking standaard is op 9 april 2026 in de PGDI vastgesteld.
 Deze standaard stelt overheden in staat om hun dataverwerkingen op een uniforme manier vast te leggen en te verantwoorden.
