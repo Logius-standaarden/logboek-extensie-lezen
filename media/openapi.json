@@ -248,9 +248,12 @@
             "$ref": "#/components/schemas/Attributes"
           },
           "links": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Link"
+            "type": "object",
+            "required": ["type"],
+            "properties": {
+              "type": {
+                "$ref": "#/components/schemas/Link"
+              }
             }
           }
         }
@@ -258,13 +261,8 @@
       "Link": {
         "description": "Verwijzing naar gerelateerde endpoints",
         "type": "object",
-        "required": ["rel", "href"],
+        "required": ["href", "method"],
         "properties": {
-          "rel": {
-            "type": "string",
-            "description": "Relatie van de link",
-            "example": "self"
-          },
           "href": {
             "type": "string",
             "format": "uri",
