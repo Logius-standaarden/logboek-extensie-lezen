@@ -95,7 +95,7 @@ De standaard helpt om de gelogde dataverwerkingen inzichtelijk te maken: als org
 
 Hieronder zijn een aantal uitgangspunten en principes benoemd. Voordat organisaties de leesextensie gaat implementeren, wordt aanbevolen om hier in de organisatie zelf naar te kijken.
 
-**Gegevens worden vastgelegd en uitleesbaar gemaakt**
+#### Gegevens worden vastgelegd en uitleesbaar gemaakt
 
 1. Overheidsorganisaties die gebruik maken van de standaard Logboek dataverwerkingen inclusief de extensie lezen om de verwerking van data gestandaardiseerd zichtbaar te maken, zijn zelf verantwoordelijk voor implementatie en inrichting van de standaard, de logs en de informatie die erin te vinden is.
 2. Dataverwerkingen worden waar mogelijk gemakkelijk inzichtelijk gemaakt.
@@ -107,7 +107,9 @@ Deze vorm van proactief beschikbaar maken van informatie moet worden onderscheid
 Dit kan bijvoorbeeld door bij een verwerkingsactiviteit een vertrouwelijke en niet-vertrouwelijke variant op te nemen, waardoor het vanuit de logfile inzichtelijk is of er bij de betreffende verwerking rekening moet worden gehouden met zwaarder wegende belangen.
 4. De organisatie borgt dat de Leesextensie optimaal ingericht wordt ten behoeve van ondersteuning van het versterken van de informatiepositie van de burger, door proactief en waar mogelijk geautomatiseerd, de informatie die zij heeft te verschaffen.
 
-**Naleving en vertrouwen**
+#### Naleving en vertrouwen
+
+<!-- markdownlint-disable ol-prefix -->
 
 5. De extensie lezen dient zodanig ingericht te worden dat deze voldoet aan de vereisten die volgen uit regels ten aanzien van informatieveiligheid.
 De organisatie bepaalt vooraf de procedurele, procesmatige en technische waarborgen die nodig zijn om ervoor te zorgen dat de uitleesbaar gemaakte gegevens niet oneigenlijk worden gebruikt of misbruikt.
@@ -118,7 +120,7 @@ De verantwoordelijkheid voor passende beveiligingsmaatregelen ligt mede op bestu
 </div>
 
 6. Publieke dienstverleners moeten erop kunnen vertrouwen dat informatie niet onjuist wordt gebruikt of wordt misbruikt:
-  - De organisatie zorgt ervoor dat de beoogde toegang tot gegevens en de juiste werking van zijn systemen continu alsook achteraf te controleren is.
-  - De organisatie verschaft alleen geautoriseerde afnemers toegang tot vertrouwelijke gegevens.
+    * De organisatie zorgt ervoor dat de beoogde toegang tot gegevens en de juiste werking van zijn systemen continu alsook achteraf te controleren is.
+    * De organisatie verschaft alleen geautoriseerde afnemers toegang tot vertrouwelijke gegevens.
 7. Bij het inzichtelijk maken van een dataverwerking, dient een tijdsstempel getoond te worden.
 De getoonde gegevens zijn zoals ze golden ten tijde van de verwerking; ook als deze bijvoorbeeld na enkele maanden opnieuw wordt ingezien of verstrekt.
