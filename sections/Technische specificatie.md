@@ -32,7 +32,8 @@ aanbeveling: Het is verstandig als de server ook bij het toepassen van query par
 
 De extensie lezen voegt één attribuut toe ten opzichte van de Core standaard.
 Het stelt in staat te verwijzen naar de volgende partij of applicatie in de keten waar verdere logging over een ketenproces te vinden is.
-Registreer bij iedere verwerking die een externe partij aanroept de URL van de lezen API waar je de verwerkingen van die partij kan opzoeken.
+Registreer bij iedere verwerking die een externe partij aanroept de URI van de lezen API waar je de verwerkingen van die partij kan opzoeken. 
+Deze URI KAN als onderdeel van de respons door de aangeroepen externe partij worden gegeven. ALS dat gebeurt, MOET de desbetreffende URI door de aanroepende partij worden vastgelegd in de logs.
 Indien er geen sprake is van het aanroepen van een andere API, dan MOET dit attribuut niet toegevoegd worden.
 Wanneer er wel een volgende partij is maar deze de extensie lezen (nog) niet implementeert kan je in dit attribuut een URL die verwijst naar een pagina met contactgegevens opnemen.
 Dit attribuut MOET een specifieke waarde hebben ongeacht het gebruikte detailniveau.
