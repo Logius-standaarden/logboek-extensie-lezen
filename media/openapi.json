@@ -152,20 +152,20 @@
         }
       },
       "StartTime": {
-        "type": "integer",
-        "format": "int64",
-        "description": "Tijdstip waarop de Actie gestart is in milliseconden sinds Epoch",
-        "example": 1764068470669,
+        "type": "string",
+        "format": "date-time",
+        "description": "Tijdstip waarop de Actie gestart is, in RFC 3339 formaat",
+        "example": "2026-01-01T06:30:00.000Z",
         "externalDocs": {
           "description": "Definitie van start_time in de standaard logboek dataverwerkingen",
           "url": "https://logius-standaarden.github.io/logboek-dataverwerkingen/#start_time"
         }
       },
       "EndTime": {
-        "type": "integer",
-        "format": "int64",
-        "description": "Tijdstip waarop de Actie beëindigd is in milliseconden sinds Epoch",
-        "example": 1764068470669,
+        "type": "string",
+        "format": "date-time",
+        "description": "Tijdstip waarop de Actie beëindigd is, in RFC 3339 formaat",
+        "example": "2026-01-01T06:30:00.000Z",
         "externalDocs": {
           "description": "Definitie van end_time in de standaard logboek dataverwerkingen",
           "url": "https://logius-standaarden.github.io/logboek-dataverwerkingen/#end_time"
