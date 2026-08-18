@@ -83,7 +83,7 @@ De extensie laat enkel vrij hoe deze authenticatie wordt ingericht.
 Authenticatie van een client die een lezen API bevraagd is verplicht en richt autorisatie regels in zodat een client alleen toegang krijgt tot loggingregels waar deze recht op heeft.
 
 <p class="note">Het Kennisplatform API's heeft een niet-normatieve module [[?access-control-module]] die hiervoor handvaten biedt.
-<p class="note">De <a href="https://gitlab.com/digilab.overheid.nl/ecosystem/logboek-dataverwerkingen/ldv-referentie-implementatie) van">referentie-implementatie</a> logboek dataverwerkingen geeft een specifiek voorbeeld voor hoe dit gedaan kan worden.
+<p class="note">De <a href="https://gitlab.com/digilab.overheid.nl/ecosystem/logboek-dataverwerkingen/ldv-referentie-implementatie">referentie implementatie</a> van logboek dataverwerkingen geeft een specifiek voorbeeld voor hoe dit gedaan kan worden.
 
 <div class="issue">
   Voeg link toe naar Batching module zodra die is vastgesteld.
