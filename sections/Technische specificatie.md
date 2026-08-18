@@ -2,84 +2,89 @@
 
 ### Architectuur
 
-Per logboek MOET er één lezen API beschikbaar zijn.
-Deze geeft toegang tot alle dataverwerkingen die in dit logboek zijn opgeslagen.
+Per logboek MOET er een lezen API beschikbaar zijn.
+Deze API geeft toegang tot alle dataverwerkingen die in dit logboek zijn opgeslagen.
 Indien de verwerkingsactiviteit over meerdere applicaties (met eigen logboeken) gaat, dienen alle lezen APIs bevraagd te worden om een compleet beeld van de verwerkingsactiviteit te krijgen.
-Wanneer er binnen één organisatie meerdere logboeken zijn dan MOETEN deze vanuit oogpunt van de extensie lezen gezien worden als aparte applicaties en voor elk logboek de lezen API implementeren.
 
 De extensie voegt een extra attribuut toe aan dataverwerkingen bovenop de core standaard waarmee een aangeroepen externe organisatie (en bijbehorende lezen API) geidentificeerd kan worden.
 
-Het bevragen van de lezen APIs begint altijd bij de applicatie waar de verwerkingsactiviteit gestart is.
+Het bevragen van meerdere logboeken middels de lezen API begint meestal bij de applicatie waar de verwerkingsactiviteit gestart is.
 Vanuit de daar opgevraagde dataverwerkingen zijn dan de URLs van APIs te vinden die als volgende bevraagd moeten worden om een compleet beeld van de verwerkingsactiviteit te krijgen.
 Op deze manier kan iteratief een compleet beeld opgebouwd worden.
 
 ### Werking lezen API
 
-De lezen API kent één type resource Dataverwerkingen volgens de core standaard logboek dataverwerkingen oftewel ProcessingActivities in opentelemetry.
+De lezen API kent een type resource Dataverwerkingen volgens de core standaard logboek dataverwerkingen oftewel DataProcessingOperations in opentelemetry.
 Voor het bevragen van deze resource MOET tenminste een van de volgende parameters meegegeven worden:
 
-- traceID (Trace)
-- dpl.core.processingActivityID (Verwerkingsactiviteit)
-- dataSubjectId (Betrokkene)
+- `traceID` (Trace)
+- `dpl.core.processingActivityId` (Verwerkingsactiviteit)
+- `dpl.core.dataSubjectId` (Betrokkene)
 
-Wanneer dit bij een request aan de server niet gebeurd, MOET de server antwoorden met een HTTP 400 Bad Request, die aangeeft dat hieraan niet voldaan is.
+Een request waar alle drie deze parameters missen MOET resulteren in een HTTP 400 Bad Request.
 
-<p class="note">Wanneer geen query paramaters worden meegegeven, dan zou de server alle dataverwerkingen terug moeten geven. Het risico is dan groot dat zowel client als server dit niet aankunnen, alsmede dat er teveel gegevens worden gedeeld.
+<p class="note">Wanneer geen query paramaters worden meegegeven, dan zou de server alle dataverwerkingen terug moeten geven.
+Het risico is dan groot dat zowel client als server dit niet aankunnen, alsmede dat er teveel gegevens worden gedeeld.
 
-aanbeveling: Het is verstandig als de server ook bij het toepassen van query parameters een maximum stelt aan het aantal terug te geven dataverwerkingen.
+Het is AANBEVOLEN een maximum aantal dataverwerkingen per response terug te geven.
+
+<div class="issue">
+  Voeg link toe naar Pagination module zodra die is vastgesteld.
+</div>
 
 ### Toevoeging bij schrijven Logs
 
-De extensie lezen voegt één attribuut toe ten opzichte van de Core standaard.
-Het stelt in staat te verwijzen naar de volgende partij of applicatie in de keten waar verdere logging over een ketenproces te vinden is.
-Registreer bij iedere verwerking die een externe partij aanroept de URL van de lezen API waar je de verwerkingen van die partij kan opzoeken.
-Indien er geen sprake is van het aanroepen van een andere API, dan MOET dit attribuut niet toegevoegd worden.
-Wanneer er wel een volgende partij is maar deze de extensie lezen (nog) niet implementeert kan je in dit attribuut een URL die verwijst naar een pagina met contactgegevens opnemen.
-Dit attribuut MOET een specifieke waarde hebben ongeacht het gebruikte detailniveau.
+De extensie lezen voegt een attribuut toe ten opzichte van de Core standaard.
 
 | Veld                   | Type   | Beschrijving                                                                                                                               |
 |------------------------|--------|--------------------------------------------------------------------------------------------------------------------------------------------|
 | dpl.read.nextLogbookId | String | verwijzing naar de lezen API van de aan te roepen externe applicatie of partij. uri naar uniek identificeerbare API volgens extensie lezen |
 
-#### Query op basis van traceID
+Het stelt in staat te verwijzen naar de volgende partij of applicatie in de keten waar verdere logging over een ketenproces te vinden is.
+Registreer bij iedere verwerking die een externe partij aanroept de URL van de lezen API waar je de verwerkingen van die partij kan opzoeken.
+Indien er geen sprake is van het aanroepen van een andere API of de externe partij heeft geen lezen API beschikbaar voor hun logboek, dan MOET dit attribuut worden weggelaten.
+Dit attribuut MOET een specifieke waarde hebben ongeacht het gebruikte detailniveau.
 
-De TraceID wordt voor organisatie overstijgende processen gevuld met de W3C TracecontextID en anders met een interne ID waarmee alle logging die bij één instantie van een proces hoort aan elkaar gerelateerd wordt.
-Deze usecase gaat ervanuit dat de TraceID bekend is en dat je alle bijbehorende logging op wil vragen.
+#### Query op basis van `traceId`
 
-#### Query op basis van processingActivityID
+Een `traceId` word vastgelegd per logregel volgens [[[trace-context-1]]].
+Een query op basis van `traceId` resulteert in alle dataverwerkingen die zijn uitgevoerd voor deze specifieke reeks aan dataverwerkingen en vereist dat de `traceId` gedeeld is met degene die de dataverwerkingen opvraagt.
 
-De processingActivityID wordt gevuld met een verwijzing naar de verwerkingsactiviteit (verwerkingsregister bij core standaard of algoritmeregister i.h.g.v. objecten extensie) die uitgevoerd wordt.
-Je wil dan alle traceIDs terugkrijgen die voor deze verwerkingsactiviteit bekend zijn.
+#### Query op basis van `dpl.core.processingActivityID`
 
-#### Query op basis van dataSubjectId
+Het attribuut `dpl.core.processingActivityID` wordt gevuld met een verwijzing naar de verwerkingsactiviteit die uitgevoerd wordt.
+Een query op basis van `dpl.core.processingActivityID` resulteert in alle dataverwerkingen die zijn uitgevoerd met dit type verwerkingsactiviteit.
+Dit vereist dat het register van Verwerkingsactiviteiten beschikbaar is voor degene die de dataverwerkingen opvraagt.
 
-De dataSubjectId gevuld met een verwijzing naar de betrokkene van verwerkingen.
-Je wil dan alle traceIDs terugkrijgen die voor deze betrokkene bekend zijn.
-Het is hierbij aan te bevelen het gebruik van BSN en andere gevoelige personsgegevens in de logging te vermijden.
-Het waar mogelijk toepassen van pseudoniemen verminderd de kans op datalekken.
+#### Query op basis van `dpl.core.dataSubjectId`
 
-#### Query op starttijd/eindtijd
+Het attribuut `dpl.core.dataSubjectId` wordt gevuld met een verwijzing naar de betrokkene.
+Een query op basis van `dpl.core.dataSubjectId` resulteert in alle dataverwerkingen die zijn uitgevoerd voor de betrokkene.
+Dit vereist dat het `dpl.core.dataSubjectIdType` en bijbehorende waarde bekend zijn bij degene die de dataverwerkingen opvraagt.
 
-Hierbij wil je filters kunnen toepassen tenminste op start_time en/of end_time einde van de dataverwerkingen.
-We kiezen ervoor om in de interface de REST API Designrules te volgen voor het aangeven van tijd.
-Deze kent andere conventies dan Open Telemetry waarin tijdstippen volgens de core standaard van logboek dataverwerkingen wordt vastgelegd.
-De implementatie van de lezen API zal dus een vertaling moeten maken van het OTLP formaat naar het ADR formaat.
+<p class="note">Houdt rekening met <a href="https://gitdocumentatie.logius.nl/publicatie/logboek/dataverwerkingen/1.0.0/#loggen-van-dataverwerkingen-met-persoonsdata">de eisen van de Core standaard</a> omtrent pseudonimisering
+
+#### Query op basis van `startTime` en/of `endTime`
+
+De `startTime` en `endTime` worden per logregel vastgelegd.
+Een query op basis van `startTime` en/of `endTime` resulteert in alle dataverwerkingen die zijn uitgevoerd vanaf, tijdens of uiterlijk tot deze tijdstippen.
+
+<p class="warning">Hier is geen vereiste persoonlijke informatie noodzakelijk om de query op te stellen.
+Houdt rekening met de beveiligingsoverwegingen hieronder.
+
+De lezen API voldoet aan de [[[ADR]]], waardoor er een translatie nodig is om de `uint64` representatie van een tijdstip van de Core standaard om te zetten in een waarde die voldoet aan [[RFC3339]].
 
 ### Beveilingsoverwegingen (Security considerations)
 
-In de OAS specificatie staat geen authenticatie voor de lezen API gespecificeerd.
-Dit is bewust niet normatief neergezet om per implementatie de vrijheid te hebben dit binnen het domein waarin de standaard wordt geimplementeerd open te laten.
-Het is echter wel belangrijk om het endpoint goed te beveiligen.
-Dus zorg tenminste voor authenticatie van de client die de lezen API bevraagd en richt autorisatie regels in zodat een client alleen toegang krijgt tot loggingregels waar deze recht op heeft.
-In zijn algemeenheid biedt de [module access control van het kennisplatform APIs](https://docs.geostandaarden.nl/api/API-Strategie-mod-access-control) hier goede handvaten voor.
-De [referentie-implementatie](https://gitlab.com/digilab.overheid.nl/ecosystem/logboek-dataverwerkingen/ldv-referentie-implementatie) van logboek dataverwerkingen geeft één specifiek voorbeeld voor hoe dit gedaan kan worden.
+Deze extensie specificeert geen specifieke wijze van authenticatie.
+Echter, authenticatie MOET worden ingericht voor een lezen API.
+De extensie laat enkel vrij hoe deze authenticatie wordt ingericht.
 
-### Todo
+Authenticatie van een client die een lezen API bevraagd is verplicht en richt autorisatie regels in zodat een client alleen toegang krijgt tot loggingregels waar deze recht op heeft.
 
-- Pagination toevoegen
-- Na publicatie logboek dataverwerkingen core, verwijzingen naar begrippen in json schema aanpassen
-- Batch bevragingen mogelijk maken voor meerdere processingActivityIds/TraceIds/dataSubjectIds volgens Batching module ADR
-- Uitwerken hoe lezen uit te breiden voor objecten. Is dit een uitbreiding op de extensie lezen of op de extensie objecten?
-- Foutmelding definieren voor wanneer het maximum aantal terug te geven dataverwerkingen van de server door een request overschreden wordt
-- Aanbeveling wat te doen als niet alle organisaties de lezen API implementeren
-- Verwijzen naar beleidsjuridischkader voor inrichting samenwerking tussen organisaties
+<p class="note">Het Kennisplatform API's heeft een niet-normatieve module [[?access-control-module]] die hiervoor handvaten biedt.
+<p class="note">De <a href="https://gitlab.com/digilab.overheid.nl/ecosystem/logboek-dataverwerkingen/ldv-referentie-implementatie) van">referentie-implementatie</a> logboek dataverwerkingen geeft een specifiek voorbeeld voor hoe dit gedaan kan worden.
+
+<div class="issue">
+  Voeg link toe naar Batching module zodra die is vastgesteld.
+</div>

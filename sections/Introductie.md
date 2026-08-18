@@ -16,6 +16,5 @@ De standaard Logboek Dataverwerkingen beschrijft een manier om technisch interop
 
 De extensie lezen breid deze uit met de mogelijkheid te kunnen lezen:
 
-- De logs van een (interne) bron te lezen
-- Logs lezen bij de(externe) bron(loggende organisatie)
-- Gerelateerde logs bij meerdere bronnen op te vragen
+- het lezen van de logs van een interne of externe bron
+- het opvragen van logs bij meerdere bronnen
