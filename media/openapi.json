@@ -246,6 +246,33 @@
           },
           "attributes": {
             "$ref": "#/components/schemas/Attributes"
+          },
+          "links": {
+            "type": "object",
+            "required": ["type"],
+            "properties": {
+              "type": {
+                "$ref": "#/components/schemas/Link"
+              }
+            }
+          }
+        }
+      },
+      "Link": {
+        "description": "Verwijzing naar gerelateerde endpoints",
+        "type": "object",
+        "required": ["href", "method"],
+        "properties": {
+          "href": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL van de link",
+            "example": "http://boerenkoolstronkerade.el/verwerkingenregister/be00596a-266d-44b2-81f0-169cc2986435"
+          },
+          "method": {
+            "type": "string",
+            "description": "HTTP methode die gebruikt kan worden om de link te benaderen",
+            "enum": ["GET", "POST", "PUT", "DELETE"]
           }
         }
       },
