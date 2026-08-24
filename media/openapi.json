@@ -21,23 +21,23 @@
   ],
   "tags": [
     {
-      "name": "ProcessingActivities",
-      "description": "Alle API operaties die bij processingActivities horen."
+      "name": "DataProcessingOperations",
+      "description": "Alle API operaties die bij dataProcessingOperations horen."
     }
   ],
   "paths": {
-    "/processing-activities": {
+    "/data-processing-operations": {
       "post": {
-        "operationId": "listProcessingActivitiesPost",
+        "operationId": "listDataProcessingOperationsPost",
         "description": "Alle dataverwerkingen ophalen",
         "summary": "Alle dataverwerkingen ophalen",
-        "tags": ["ProcessingActivities"],
+        "tags": ["DataProcessingOperations"],
         "requestBody": {
-          "$ref": "#/components/requestBodies/ProcessingActivityRequest"
+          "$ref": "#/components/requestBodies/DataProcessingOperationRequest"
         },
         "responses": {
           "200": {
-            "$ref": "#/components/responses/ProcessingActivitiesResponse"
+            "$ref": "#/components/responses/DataProcessingOperationsResponse"
           },
           "400": {
             "$ref": "#/components/responses/BadRequest"
@@ -51,19 +51,19 @@
   },
   "components": {
     "requestBodies": {
-      "ProcessingActivityRequest": {
+      "DataProcessingOperationRequest": {
         "required": true,
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/ProcessingActivityRequest"
+              "$ref": "#/components/schemas/DataProcessingOperationRequest"
             }
           }
         }
       }
     },
     "responses": {
-      "ProcessingActivitiesResponse": {
+      "DataProcessingOperationsResponse": {
         "description": "OK",
         "headers": {
           "API-Version": {
@@ -73,7 +73,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/ListProcessingActivities"
+              "$ref": "#/components/schemas/ListDataProcessingOperations"
             }
           }
         }
@@ -117,7 +117,7 @@
         "x-comment": "Dit is een verwijzing naar een schema met de attributen die je voor jouw implementatie nodig hebt, indien je enkel LDV core toepast dan volstaat een referentie naar https://schemas.don.projects.digilab.network/logboek-dataverwerkingen/attributes anders wordt aangeraden dit lokale bestand aan te passen",
         "$ref": "./attributes.schema.json"
       },
-      "ProcessingActivityRequest": {
+      "DataProcessingOperationRequest": {
         "type": "object",
         "allOf": [
           {
@@ -171,22 +171,22 @@
           "url": "https://logius-standaarden.github.io/logboek-dataverwerkingen/#end_time"
         }
       },
-      "ListProcessingActivities": {
+      "ListDataProcessingOperations": {
         "type": "object",
-        "required": ["processingActivities"],
+        "required": ["dataProcessingOperations"],
         "properties": {
           "metadata": {
             "$ref": "#/components/schemas/Metadata"
           },
-          "processingActivities": {
+          "dataProcessingOperations": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ProcessingActivity"
+              "$ref": "#/components/schemas/DataProcessingOperation"
             }
           }
         }
       },
-      "ProcessingActivity": {
+      "DataProcessingOperation": {
         "description": "Dataverwerking",
         "type": "object",
         "required": [
