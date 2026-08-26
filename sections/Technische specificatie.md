@@ -80,7 +80,7 @@ Deze extensie specificeert geen specifieke wijze van authenticatie.
 Echter, authenticatie MOET worden ingericht voor een lezen API.
 De extensie laat enkel vrij hoe deze authenticatie wordt ingericht.
 
-Authenticatie van een client die een lezen API bevraagd is verplicht en richt autorisatie regels in zodat een client alleen toegang krijgt tot loggingregels waar deze recht op heeft.
+Authenticatie van een client die een lezen API bevraagd is verplicht. De implementatie van de lezen API richt autorisatie regels in zodat een client alleen toegang krijgt tot loggingregels waar deze recht op heeft.
 
 <p class="note">Het Kennisplatform API's heeft een niet-normatieve module [[?access-control-module]] die hiervoor handvaten biedt.
 <p class="note">De <a href="https://gitlab.com/digilab.overheid.nl/ecosystem/logboek-dataverwerkingen/ldv-referentie-implementatie">referentie implementatie</a> van logboek dataverwerkingen geeft een specifiek voorbeeld voor hoe dit gedaan kan worden.
