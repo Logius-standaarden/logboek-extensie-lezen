@@ -47,7 +47,7 @@ Het inzagerecht op grond van artikel 15 AVG omvat niet alleen het verstrekken va
 Het enkel beschikbaar stellen van loggegevens is in beginsel niet voldoende om volledig aan dit recht te voldoen.
 
 Daarnaast gelden procedurele vereisten op grond van artikel 12 AVG.
-Zo moet informatie in een transparante en begrijpelijke vorm worden verstrekt, dient in beginsel binnen één maand te worden gereageerd en moet bij een (gedeeltelijke) afwijzing worden gewezen op de openstaande rechtsmiddelen.
+Zo moet informatie in een transparante en begrijpelijke vorm worden verstrekt, dient in beginsel binnen 1 maand te worden gereageerd en moet bij een (gedeeltelijke) afwijzing worden gewezen op de openstaande rechtsmiddelen.
 
 Zie voor een uitleg van deze informatieverplichtingen paragraaf ["Informatieverplichtingen in de AVG"](https://gitdocumentatie.logius.nl/publicatie/logboek/juridisch/#informatieverplichtingen-in-de-avg) in het juridisch beleidskader van de normatieve standaard.
 

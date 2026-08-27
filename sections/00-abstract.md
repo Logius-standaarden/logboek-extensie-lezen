@@ -1,1 +1,0 @@
-Dit wordt de samenvatting

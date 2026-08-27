@@ -54,4 +54,13 @@ loadRespecWithConfiguration({
     }
   ],
   github: "https://github.com/Logius-standaarden/logboek-extensie-lezen",
+  localBiblio: {
+    "access-control-module": {
+      authors: ["Kennisplatform API's"],
+      date: "December 21, 2023",
+      href: "https://docs.geostandaarden.nl/api/API-Strategie-mod-access-control/",
+      publisher: "Geonovum",
+      title: "API Access control module"
+    },
+  }
 });
