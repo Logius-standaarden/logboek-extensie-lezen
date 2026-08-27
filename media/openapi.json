@@ -139,7 +139,7 @@
           }
         ],
         "minProperties": 1,
-        "description": "Minimaal een moet gevuld zijn, zorg voor een zo exact mogelijke zoekopdracht"
+        "description": "Minimaal 1 moet gevuld zijn, zorg voor een zo exact mogelijke zoekopdracht"
       },
       "TraceID": {
         "type": "string",
