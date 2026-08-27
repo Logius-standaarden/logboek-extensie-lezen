@@ -62,5 +62,12 @@ loadRespecWithConfiguration({
       publisher: "Geonovum",
       title: "API Access control module"
     },
+    "batching-module": {
+      authors: ["Kennisplatform API's"],
+      date: "March 11, 2026",
+      href: "https://docs.geostandaarden.nl/api/cv-st-API-Strategie-mod-batching-20260311/",
+      publisher: "Geonovum",
+      title: "API Batching module"
+    },
   }
 });
