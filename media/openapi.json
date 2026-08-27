@@ -143,9 +143,9 @@
       },
       "TraceID": {
         "type": "string",
-        "format": "uuid",
+        "pattern": "^[0-9a-f]{32}$",
         "description": "Unieke identificerende code van Trace die Dataverwerking volgt",
-        "example": "ef4e77b9-b03b-585f-b613-5fcf8d8555fb",
+        "example": "ef4e77b9b03b585fb6135fcf8d8555fb",
         "externalDocs": {
           "description": "Definitie van Trace in de standaard logboek dataverwerkingen",
           "url": "https://logius-standaarden.github.io/logboek-dataverwerkingen/#dfn-traces"
@@ -209,9 +209,9 @@
           },
           "spanId": {
             "type": "string",
-            "pattern": "^[0-9a-fA-F]{16}$",
+            "pattern": "^[0-9a-f]{32}$",
             "description": "Unieke identificerende code van Actie binnen de Dataverwerking",
-            "example": "beb0291b5162d850",
+            "example": "beb0291b5162d850ac4363ab51829fd0",
             "externalDocs": {
               "description": "Definitie van Actie in de standaard logboek dataverwerkingen",
               "url": "http://gitdocumentatie.logius.nl/publicatie/logboek/dataverwerkingen/#span_id"
