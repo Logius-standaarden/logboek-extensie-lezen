@@ -209,9 +209,9 @@
           },
           "spanId": {
             "type": "string",
-            "pattern": "^[0-9a-f]{32}$",
+            "pattern": "^[0-9a-f]{16}$",
             "description": "Unieke identificerende code van Actie binnen de Dataverwerking",
-            "example": "beb0291b5162d850ac4363ab51829fd0",
+            "example": "beb0291b5162d850",
             "externalDocs": {
               "description": "Definitie van Actie in de standaard logboek dataverwerkingen",
               "url": "http://gitdocumentatie.logius.nl/publicatie/logboek/dataverwerkingen/#span_id"
