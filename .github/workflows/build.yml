@@ -19,3 +19,13 @@ jobs:
     name: Publish (Logius)
     uses: Logius-standaarden/Automatisering/.github/workflows/publish.yml@main
     secrets: inherit
+  adr-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Valideer OAS tegen de API Design Rules
+        run: |
+          npx @developer-overheid-nl/don-checker@latest validate --standard adr --input media/openapi.json
