@@ -47,6 +47,28 @@
           }
         }
       }
+    },
+    "/data-processing-operations/_batch": {
+      "post": {
+        "operationId": "batchDataProcessingOperations",
+        "description": "Meerdere onafhankelijke zoekopdrachten naar dataverwerkingen in één aanroep uitvoeren (batching, gebaseerd op de [ADR-module Batching, versie 2026-03-11](https://docs.geostandaarden.nl/api/cv-st-API-Strategie-mod-batching-20260311/)). Elke request in de batch wordt onafhankelijk verwerkt; het resultaat op positie i in `results` hoort bij de request op positie i in `requests`. De batch is niet transactioneel: een fout bij het uitvoeren van één request laat de overige requests onverlet. Validatiefouten in de batch zelf leiden wel tot afwijzing van de hele batch met een 400-respons; dat geldt onder meer voor een overschrijding van het maximum aantal requests en voor een conflict tussen `context` en de `filter` van een request.",
+        "summary": "Batch zoekopdrachten naar dataverwerkingen",
+        "tags": ["DataProcessingOperations"],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/BatchDataProcessingOperationsRequest"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/BatchDataProcessingOperationsResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -57,6 +79,16 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/DataProcessingOperationRequest"
+            }
+          }
+        }
+      },
+      "BatchDataProcessingOperationsRequest": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/BatchDataProcessingOperationsRequest"
             }
           }
         }
@@ -74,6 +106,21 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/ListDataProcessingOperations"
+            }
+          }
+        }
+      },
+      "BatchDataProcessingOperationsResponse": {
+        "description": "OK",
+        "headers": {
+          "API-Version": {
+            "$ref": "https://static.developer.overheid.nl/adr/components.yaml#/headers/API-Version"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/BatchDataProcessingOperationsResponse"
             }
           }
         }
@@ -288,6 +335,80 @@
           "organizationName": {
             "type": "string",
             "description": "Organisatie waartoe dit Logboek behoort"
+          }
+        }
+      },
+      "BatchDataProcessingOperationsRequest": {
+        "type": "object",
+        "description": "Een batch met meerdere onafhankelijke zoekopdrachten naar dataverwerkingen. De volgorde van `requests` is betekenisvol en wordt in `results` behouden. Optioneel kunnen via `context` gedeelde criteria worden meegegeven die op alle requests van toepassing zijn.",
+        "required": ["requests"],
+        "properties": {
+          "context": {
+            "$ref": "#/components/schemas/BatchContext"
+          },
+          "requests": {
+            "type": "array",
+            "description": "Geordende lijst van zoekopdrachten. Elke request wordt onafhankelijk verwerkt en levert exact één resultaat op dezelfde positie in `results`. maxItems (100) is de maximale batchgrootte en kan per implementatie worden aangepast aan de capaciteit van de server; bij overschrijding volgt een 400-respons (application/problem+json). minItems is 1 zodat een lege batch wordt afgewezen.",
+            "minItems": 1,
+            "maxItems": 100,
+            "items": {
+              "$ref": "#/components/schemas/BatchDataProcessingOperationRequestItem"
+            }
+          }
+        }
+      },
+      "BatchContext": {
+        "type": "object",
+        "description": "Optionele gedeelde criteria die op ALLE requests in de batch worden toegepast (vergelijkbaar met het `context`-voorbeeld `peildatum` uit de ADR-module Batching; deze API kent geen peildatum, het tijdvenster is hier het equivalent). Deze criteria worden gecombineerd (logische EN) met de `filter` van elke afzonderlijke request. Wordt eenzelfde veld zowel in `context` als in de `filter` van een request opgegeven, dan is dat een conflict en wordt de HELE batch afgewezen met een 400-respons (application/problem+json); de server past in dat geval geen voorrangsregel toe. Deze strikte keuze voorkomt dat een meegegeven criterium stilzwijgend wordt genegeerd. Het gebruik van `context` is optioneel; wordt het weggelaten, dan gelden uitsluitend de criteria per request. Let op: het combineren van criteria en het afwijzen van conflicten is gedrag dat door de server-implementatie moet worden afgedwongen; de OAS en het JSON Schema kunnen dit niet garanderen.",
+        "minProperties": 1,
+        "additionalProperties": false,
+        "properties": {
+          "startTime": {
+            "$ref": "#/components/schemas/StartTime"
+          },
+          "endTime": {
+            "$ref": "#/components/schemas/EndTime"
+          }
+        }
+      },
+      "BatchDataProcessingOperationRequestItem": {
+        "type": "object",
+        "description": "Eén zoekopdracht binnen een batch naar de collectie dataverwerkingen (collection request). De `filter` volgt dezelfde criteria als de body van POST /data-processing-operations.",
+        "required": ["filter"],
+        "properties": {
+          "filter": {
+            "$ref": "#/components/schemas/DataProcessingOperationRequest"
+          }
+        }
+      },
+      "BatchDataProcessingOperationsResponse": {
+        "type": "object",
+        "description": "Resultaten van een batch. `results` bevat exact evenveel items als `requests`, in dezelfde volgorde.",
+        "required": ["results"],
+        "properties": {
+          "metadata": {
+            "$ref": "#/components/schemas/Metadata"
+          },
+          "results": {
+            "type": "array",
+            "description": "Geordende lijst van resultaten, één per request op dezelfde positie in `requests`.",
+            "items": {
+              "$ref": "#/components/schemas/BatchDataProcessingOperationResult"
+            }
+          }
+        }
+      },
+      "BatchDataProcessingOperationResult": {
+        "type": "object",
+        "description": "Resultaat van één zoekopdracht binnen de batch. Bij geen treffers is `items` een lege array; het resultaat wordt nooit weggelaten. De ADR-module schrijft voor een collection request de naam `items` voor; deze wijkt daarom bewust af van `dataProcessingOperations` in ListDataProcessingOperations.",
+        "required": ["items"],
+        "properties": {
+          "items": {
+            "type": "array",
+            "description": "De dataverwerkingen die aan de bijbehorende `filter` voldoen.",
+            "items": {
+              "$ref": "#/components/schemas/DataProcessingOperation"
+            }
           }
         }
       }
